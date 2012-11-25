@@ -1,7 +1,7 @@
 Do you need a professional backend for your iOS apps? Add one with **DeploydKit** for [Deployd](http://www.deployd.com) in minutes!
 
 DeploydKit is based on [DataKit project](https://github.com/eaigner/DataKit), and work with [Deployd API](https://github.com/deployd/deployd) that has great features to create a solid backend for the production environment. Integrate the SDK into your app, configure Deployd and you are ready to go!
- **DeploydKit** requires iOS 5 and ARC and has been tested with Deployd 0.6.9. DeploydKit has not been developed by Deployd team, so do not disturb them with information relating to DeploydKit, used the issues of this project.
+ **DeploydKit** requires iOS 5 and ARC and has been tested with Deployd 0.6.9. DeploydKit has not been developed by Deployd team, so do not disturb them with information relating to DeploydKit, use the issues of this project.
 
 Thanks to Erik for your great work with DataKit and thanks to Deployd team for your great work with Deployd.
 
