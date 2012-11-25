@@ -47,7 +47,8 @@ Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket reso
 
 ```objc
 // Saving
-DKFile *file = [DKFile fileWithName:nil data:data]; //filename generated server side (with DeploydKit s3-bucket resource) 
+//filename generated server side with DeploydKit s3-bucket resource, or chosen by the client using with Deployd deployd/dpd-s3
+DKFile *file = [DKFile fileWithName:nil data:data];
 [file save];
 // Loading
 DKFile *loadMe = [DKFile fileWithName:@"SomeFileName"];
