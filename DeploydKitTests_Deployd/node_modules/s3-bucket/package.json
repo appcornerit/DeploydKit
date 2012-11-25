@@ -1,0 +1,8 @@
+{
+  "name": "s3-bucket-resource",
+  "version": "0.0.1-pre",
+  "dependencies": {
+      "knox": "0.1.x"
+    , "formidable": "1.0.x"
+  }
+}

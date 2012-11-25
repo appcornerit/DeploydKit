@@ -1,0 +1,37 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"displayName": {
+			"name": "displayName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "displayName",
+			"order": 0
+		},
+		"email": {
+			"name": "email",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "email",
+			"order": 1
+		},
+		"createdAt": {
+			"name": "createdAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdAt",
+			"order": 2
+		},
+		"updatedAt": {
+			"name": "updatedAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "updatedAt",
+			"order": 3
+		}
+	}
+}

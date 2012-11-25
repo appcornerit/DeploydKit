@@ -1,0 +1,77 @@
+{
+	"type": "Collection",
+	"properties": {
+		"text": {
+			"name": "text",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "text",
+			"order": 0
+		},
+		"location": {
+			"name": "location",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "location",
+			"order": 1
+		},
+		"sharedTo": {
+			"name": "sharedTo",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "sharedTo",
+			"order": 2
+		},
+		"visits": {
+			"name": "visits",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "visits",
+			"order": 3
+		},
+		"price": {
+			"name": "price",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "price",
+			"order": 4
+		},
+		"quantity": {
+			"name": "quantity",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "quantity",
+			"order": 5
+		},
+		"createdAt": {
+			"name": "createdAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdAt",
+			"order": 6
+		},
+		"updatedAt": {
+			"name": "updatedAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "updatedAt",
+			"order": 7
+		},
+		"creatorId": {
+			"name": "creatorId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "creatorId",
+			"order": 8
+		}
+	}
+}
