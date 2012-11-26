@@ -336,9 +336,7 @@ DKSynthesize(loginMap)
         } copy];
 
         // Create request dict
-        NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                            //entity.entityName, @"entity",
-                                            nil];
+        NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
         if([action isEqualToString:@"login"]){
             for (id key in self.loginMap) {
                 id value = [self.loginMap objectForKey:key];

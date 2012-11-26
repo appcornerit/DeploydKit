@@ -32,7 +32,7 @@
 /**
  The entity ID
  */
-@property (nonatomic, strong) NSString *entityId;
+@property (nonatomic, readonly) NSString *entityId;
 
 /**
  The update date
