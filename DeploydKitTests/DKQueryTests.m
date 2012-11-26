@@ -784,7 +784,7 @@
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   
-  //Test exclude (NOT WORK, DOCUMENTED IN DEPLOYD 0.6.9v, OPEN ISSUE #130) 
+  //Test exclude
   error = nil;    
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
   [q whereEntityIdMatches:postObject.entityId];
@@ -792,20 +792,18 @@
   NSArray * results = [q findAll:&error];
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *e2 = [results objectAtIndex:0];
-  NSLog(@"entity => %@", e2);
   STAssertNil(error, error.localizedDescription);
   STAssertNotNil(e2, nil);
   STAssertNil([e2 objectForKey:kDKEntityTestsPostText], nil);
   STAssertNil([e2 objectForKey:kDKEntityTestsPostQuantity], nil);
   STAssertEqualObjects([e2 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithInteger:50], nil);
   
-  //Test include (NOT WORK, DOCUMENTED IN DEPLOYD 0.6.9v, OPEN ISSUE #130) 
+  //Test include
   error = nil;
   [q includeKeys:[NSArray arrayWithObjects:kDKEntityTestsPostText, kDKEntityTestsPostQuantity, nil]];
   results = [q findAll:&error];
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *e3 = [results objectAtIndex:0];
-  NSLog(@"entity => %@", e3);
   STAssertNil(error, error.localizedDescription);
   STAssertNotNil(e3, nil);
   STAssertEqualObjects([e3 objectForKey:kDKEntityTestsPostText], @"post", nil);

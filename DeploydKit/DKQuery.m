@@ -98,7 +98,10 @@ DKSynthesize(equalMap)
 }
 
 - (void)whereKey:(NSString *)key equalTo:(id)object {
-  [self.equalMap setObject:object forKey:key];
+  if(key && [key isEqualToString:kDKEntityIDField])
+     [self.queryMap setObject:object forKey:key];
+  else
+     [self.equalMap setObject:object forKey:key];
 }
 
 - (void)whereKey:(NSString *)key lessThan:(id)object {
@@ -212,7 +215,7 @@ DKSynthesize(equalMap)
   // Create request dict
   NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
   NSMutableString *queryString = [NSMutableString new];
-    
+  
   if (self.equalMap.count > 0) {
       NSString* mapQuery = [self.equalMap urlEncodedString];
       if(mapQuery.length > 0)      
@@ -250,6 +253,7 @@ DKSynthesize(equalMap)
   if (countOut != NULL) {
       [queryParams appendString:@"/count"];
   }
+
   if(queryString.length > 0){
       [queryParams appendFormat:@"?"];
       [queryParams appendString:queryString];      

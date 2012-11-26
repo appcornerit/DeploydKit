@@ -272,7 +272,6 @@
  Excludes the specified keys from the result entities
  
  This method is mutually exclusive to <includeKeys:>
- (NOT WORK, DOCUMENTED IN DEPLOYD 0.6.9v, OPEN ISSUE #130) 
  @param keys The keys to exclude
  */
 - (void)excludeKeys:(NSArray *)keys;
@@ -281,7 +280,6 @@
  Includes only the specified keys in the result entities
 
  This method is mutually exclusive to <excludeKeys:>
- (NOT WORK, DOCUMENTED IN DEPLOYD 0.6.9v, OPEN ISSUE #130)  
  @param keys The keys to include
  */
 - (void)includeKeys:(NSArray *)keys;
