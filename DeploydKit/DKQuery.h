@@ -240,17 +240,15 @@
 
 /**
  Checks if the entity key exists
- (IT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY NOT WORK IN FUTURE VERSIONS)
  @param key The entity key
  */
-//- (void)whereKeyExists:(NSString *)key;
+- (void)whereKeyExists:(NSString *)key;
 
 /**
  Checks if the entity key does not exist
- (IT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY NOT WORK IN FUTURE VERSIONS)
  @param key The entity key
  */
-//- (void)whereKeyDoesNotExist:(NSString *)key;
+- (void)whereKeyDoesNotExist:(NSString *)key;
 
 /**
  Checks if the entity ID key matches 

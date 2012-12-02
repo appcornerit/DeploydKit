@@ -93,10 +93,8 @@
   DKEntity *result = [results lastObject];
   NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
   NSTimeInterval createdAt = result.createdAt.timeIntervalSince1970;
-  //NSTimeInterval updatedAt = result.updatedAt.timeIntervalSince1970;
   STAssertNotNil(result.entityId, nil);
   STAssertEqualsWithAccuracy(createdAt, now, 2.0, nil);
-  //STAssertEqualsWithAccuracy(updatedAt, now, 2.0, nil);
   STAssertEqualObjects([result objectForKey:kDKEntityTestsPostText], @"post1", nil);
   
   //Fetch matching not 'post1'
@@ -109,10 +107,8 @@
   result = [results lastObject];
   now = [[NSDate date] timeIntervalSince1970];
   createdAt = result.createdAt.timeIntervalSince1970;
-  //updatedAt = result.updatedAt.timeIntervalSince1970;
   STAssertNotNil(result.entityId, nil);
   STAssertEqualsWithAccuracy(createdAt, now, 2.0, nil);
-  //STAssertEqualsWithAccuracy(updatedAt, now, 2.0, nil);
   STAssertEqualObjects([result objectForKey:kDKEntityTestsPostText], @"post2", nil);
   
   //Fetch all posts
@@ -462,8 +458,7 @@
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
 
-  //Test exists  (IT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY NOT WORK IN FUTURE VERSIONS)
-  /*
+  //Test exists
   error = nil;    
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
   [q whereKeyExists:kDKEntityTestsPostQuantity];
@@ -472,10 +467,8 @@
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *r0 = [results lastObject];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:1.0], nil);
-  */
     
-  //Test not exists (IT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY NOT WORK IN FUTURE VERSIONS)
-  /*
+  //Test not exists
   error = nil;
   DKQuery *q2 = [DKQuery queryWithEntityName:kDKEntityTestsPost];
   [q2 whereKeyDoesNotExist:kDKEntityTestsPostQuantity];
@@ -484,7 +477,6 @@
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:50.0], nil);
-  */
     
   //Delete posts
   error = nil;
