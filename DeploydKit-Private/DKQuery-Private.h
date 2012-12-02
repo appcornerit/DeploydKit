@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSMutableArray *ors;
 @property (nonatomic, strong) NSMutableArray *ands;
 @property (nonatomic, strong) NSMutableDictionary *fieldInclExcl;
-@property (nonatomic, strong) NSMutableDictionary *equalMap;
 
 - (id)find:(NSError **)error one:(BOOL)findOne count:(NSUInteger *)countOut;
 

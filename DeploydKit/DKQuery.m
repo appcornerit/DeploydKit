@@ -16,7 +16,6 @@
 #import "DKEntity.h"
 #import "DKEntity-Private.h"
 #import "DKManager.h"
-#import "NSDictionary+UrlEncoding.h"
 
 @interface DKQueryConditionProxy : NSProxy
 
@@ -35,7 +34,6 @@ DKSynthesize(sort)
 DKSynthesize(ors)
 DKSynthesize(ands)
 DKSynthesize(fieldInclExcl)
-DKSynthesize(equalMap)
 
 + (DKQuery *)queryWithEntityName:(NSString *)entityName {
   return [[self alloc] initWithEntityName:entityName];
@@ -50,7 +48,6 @@ DKSynthesize(equalMap)
     self.ors = [NSMutableArray new];
     self.ands = [NSMutableArray new];
     self.fieldInclExcl = [NSMutableDictionary new];
-    self.equalMap = [NSMutableDictionary new];
     self.cachePolicy = DKCachePolicyIgnoreCache;
   }
   return self;
@@ -62,7 +59,6 @@ DKSynthesize(equalMap)
   [self.ors removeAllObjects];
   [self.ands removeAllObjects];
   [self.fieldInclExcl removeAllObjects];
-  [self.equalMap removeAllObjects];
 }
 
 - (DKQuery *)or {
@@ -98,10 +94,7 @@ DKSynthesize(equalMap)
 }
 
 - (void)whereKey:(NSString *)key equalTo:(id)object {
-  if(key && [key isEqualToString:kDKEntityIDField])
-     [self.queryMap setObject:object forKey:key];
-  else
-     [self.equalMap setObject:object forKey:key];
+  [self.queryMap setObject:object forKey:key];
 }
 
 - (void)whereKey:(NSString *)key lessThan:(id)object {
@@ -214,13 +207,7 @@ DKSynthesize(equalMap)
 - (id)find:(NSError **)error one:(BOOL)findOne count:(NSUInteger *)countOut {  
   // Create request dict
   NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
-  NSMutableString *queryString = [NSMutableString new];
   
-  if (self.equalMap.count > 0) {
-      NSString* mapQuery = [self.equalMap urlEncodedString];
-      if(mapQuery.length > 0)      
-          [queryString appendString:mapQuery];      
-  }
   if (self.queryMap.count > 0) {
         for (id key in self.queryMap) {
              id value = [self.queryMap objectForKey:key];
@@ -252,11 +239,6 @@ DKSynthesize(equalMap)
   NSMutableString * queryParams = [NSMutableString stringWithString:self.entityName];
   if (countOut != NULL) {
       [queryParams appendString:@"/count"];
-  }
-
-  if(queryString.length > 0){
-      [queryParams appendFormat:@"?"];
-      [queryParams appendString:queryString];      
   }
     
   // Send request synchronously
@@ -370,10 +352,7 @@ DKSynthesize(equalMap)
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
   NSMutableDictionary *queryMap = query_.queryMap;
-  query_.queryMap = [NSMutableDictionary new];
-    
-  NSMutableDictionary *equalMap = query_.equalMap;
-  query_.equalMap = [NSMutableDictionary new];
+  query_.queryMap = [NSMutableDictionary new];    
     
   [invocation invokeWithTarget:query_];
 
@@ -381,11 +360,6 @@ DKSynthesize(equalMap)
     [conditions_ addObject:query_.queryMap];
   }
   query_.queryMap = queryMap;
-    
-  if (query_.equalMap.count > 0) {
-    [conditions_ addObject:query_.equalMap];
-  }
-  query_.equalMap = equalMap;
 }
 
  - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {

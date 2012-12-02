@@ -51,8 +51,6 @@
 		FFB5E51B165ACFE800B0651C /* DKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F2165ACFE800B0651C /* DKRequest.m */; };
 		FFB5E51D165ACFE800B0651C /* NSData+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E51E165ACFE800B0651C /* NSData+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */; };
-		FFB5E520165ACFE800B0651C /* NSDictionary+UrlEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F5165ACFE800B0651C /* NSDictionary+UrlEncoding.h */; };
-		FFB5E521165ACFE800B0651C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F6165ACFE800B0651C /* NSDictionary+UrlEncoding.m */; };
 		FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E526165ACFE800B0651C /* NSString+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E527165ACFE800B0651C /* NSString+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4FA165ACFE800B0651C /* NSString+DeploydKit.m */; };
@@ -60,7 +58,6 @@
 		FFB5E52A165ACFE800B0651C /* NSURLConnection+Timeout.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4FC165ACFE800B0651C /* NSURLConnection+Timeout.m */; };
 		FFB5E552165ACFF600B0651C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FFB5E53C165ACFF600B0651C /* InfoPlist.strings */; };
 		FFB5E554165AD80500B0651C /* NSError+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E553165AD80500B0651C /* NSError+DeploydKit.m */; };
-		FFB5E556165AF1E500B0651C /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F6165ACFE800B0651C /* NSDictionary+UrlEncoding.m */; };
 		FFB5E558165AF1E500B0651C /* DKEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E532165ACFF600B0651C /* DKEntityTests.m */; };
 		FFB5E559165AF1E500B0651C /* DKFileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E534165ACFF600B0651C /* DKFileTests.m */; };
 		FFB5E55A165AF1E500B0651C /* DKQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E538165ACFF600B0651C /* DKQueryTests.m */; };
@@ -111,8 +108,6 @@
 		FFB5E4F2165ACFE800B0651C /* DKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRequest.m; sourceTree = "<group>"; };
 		FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DeploydKit.h"; sourceTree = "<group>"; };
 		FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DeploydKit.m"; sourceTree = "<group>"; };
-		FFB5E4F5165ACFE800B0651C /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
-		FFB5E4F6165ACFE800B0651C /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+DeploydKit.h"; sourceTree = "<group>"; };
 		FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DeploydKit.h"; sourceTree = "<group>"; };
 		FFB5E4FA165ACFE800B0651C /* NSString+DeploydKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DeploydKit.m"; sourceTree = "<group>"; };
@@ -218,8 +213,6 @@
 				FFB5E4F2165ACFE800B0651C /* DKRequest.m */,
 				FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */,
 				FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */,
-				FFB5E4F5165ACFE800B0651C /* NSDictionary+UrlEncoding.h */,
-				FFB5E4F6165ACFE800B0651C /* NSDictionary+UrlEncoding.m */,
 				FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */,
 				FFB5E553165AD80500B0651C /* NSError+DeploydKit.m */,
 				FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */,
@@ -269,7 +262,6 @@
 				FFB5E526165ACFE800B0651C /* NSString+DeploydKit.h in Headers */,
 				FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */,
 				FFB5E519165ACFE800B0651C /* DKQuery-Private.h in Headers */,
-				FFB5E520165ACFE800B0651C /* NSDictionary+UrlEncoding.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +400,6 @@
 				FFB5E513165ACFE800B0651C /* DKQueryTableViewController.m in Sources */,
 				FFB5E51B165ACFE800B0651C /* DKRequest.m in Sources */,
 				FFB5E51E165ACFE800B0651C /* NSData+DeploydKit.m in Sources */,
-				FFB5E521165ACFE800B0651C /* NSDictionary+UrlEncoding.m in Sources */,
 				FFB5E527165ACFE800B0651C /* NSString+DeploydKit.m in Sources */,
 				FFB5E52A165ACFE800B0651C /* NSURLConnection+Timeout.m in Sources */,
 				FFB5E554165AD80500B0651C /* NSError+DeploydKit.m in Sources */,
@@ -419,7 +410,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFB5E556165AF1E500B0651C /* NSDictionary+UrlEncoding.m in Sources */,
 				FFB5E558165AF1E500B0651C /* DKEntityTests.m in Sources */,
 				FFB5E559165AF1E500B0651C /* DKFileTests.m in Sources */,
 				FFB5E55A165AF1E500B0651C /* DKQueryTests.m in Sources */,

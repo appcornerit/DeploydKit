@@ -17,8 +17,6 @@
 #import "DKNetworkActivity.h"
 #import "NSURLConnection+Timeout.h"
 
-#import "NSDictionary+UrlEncoding.h"
-
 @interface DKFile ()
 @property (nonatomic, assign, readwrite) BOOL isVolatile;
 @property (nonatomic, assign, readwrite) BOOL isLoading;
@@ -70,16 +68,9 @@ DKSynthesize(data)
   // Send request synchronously
   DKRequest *request = [DKRequest request];
   request.cachePolicy = DKCachePolicyIgnoreCache;
-    
-  NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];    
-  NSMutableString *queryString = [NSMutableString new];
-  NSDictionary *fileNameDict = [NSDictionary dictionaryWithObject:fileName forKey:kDKRequestAssignedFileName];
-  NSString* mapQuery = [fileNameDict urlEncodedString];
-  [queryString appendString:mapQuery];
-    
+
+  NSDictionary *requestDict = [NSDictionary dictionaryWithObject:fileName forKey:kDKRequestAssignedFileName];
   NSMutableString * queryParams = [NSMutableString stringWithString:kDKRequestFileCollection];
-  [queryParams appendFormat:@"?"];
-  [queryParams appendString:queryString];
     
   NSError *requestError = nil;
   id results = [request sendRequestWithObject:requestDict method:@"query" entity:queryParams error:&requestError];
