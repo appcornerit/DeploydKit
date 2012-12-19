@@ -1,0 +1,14 @@
+{
+	"type": "Apn",
+	"cert": "cert.pem",
+	"certData": "",
+	"key": "key.pem",
+	"keyData": "",
+	"passphrase": "",
+	"ca": "",
+	"gateway": "gateway.sandbox.push.apple.com",
+	"port": 2195,
+	"enhanced": "true",
+	"errorCallback": "",
+	"cacheLength": 100
+}

@@ -17,6 +17,7 @@
 
 static NSString *kDKManagerAPIEndpoint;
 static BOOL kDKManagerRequestLogEnabled;
+static NSString *kDKManagerAPISecret;
 static NSString *kDKManagerSessionId;
 
 + (void)setAPIEndpoint:(NSString *)absoluteString {
@@ -31,6 +32,10 @@ static NSString *kDKManagerSessionId;
     
   }
   kDKManagerAPIEndpoint = [absoluteString copy];
+}
+
++ (void)setAPISecret:(NSString *)secret {
+    kDKManagerAPISecret = [secret copy];
 }
 
 + (void)setSessionId:(NSString *)sid {
@@ -48,6 +53,14 @@ static NSString *kDKManagerSessionId;
 + (NSURL *)endpointForMethod:(NSString *)method {
   NSString *ep = [[self APIEndpoint] stringByAppendingPathComponent:method];
   return [NSURL URLWithString:ep];
+}
+
++ (NSString *)APISecret {
+    if (kDKManagerAPISecret.length == 0) {
+        [NSException raise:NSInternalInconsistencyException format:@"No API secret specified"];
+        return nil;
+    }
+    return kDKManagerAPISecret;
 }
 
 + (NSString *)sessionId {

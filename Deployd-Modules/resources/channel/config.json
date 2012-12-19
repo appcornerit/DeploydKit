@@ -1,0 +1,125 @@
+{
+	"type": "Collection",
+	"properties": {
+		"udid": {
+			"name": "udid",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "udid",
+			"order": 0
+		},
+		"appVersion": {
+			"name": "appVersion",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "appVersion",
+			"order": 1
+		},
+		"deviceToken": {
+			"name": "deviceToken",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "deviceToken",
+			"order": 2
+		},
+		"deviceSystem": {
+			"name": "deviceSystem",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "deviceSystem",
+			"order": 3
+		},
+		"deviceModel": {
+			"name": "deviceModel",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "deviceModel",
+			"order": 4
+		},
+		"channels": {
+			"name": "channels",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "channels",
+			"order": 5
+		},
+		"badge": {
+			"name": "badge",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "badge",
+			"order": 6
+		},
+		"timeZone": {
+			"name": "timeZone",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "timeZone",
+			"order": 7
+		},
+		"locale": {
+			"name": "locale",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "locale",
+			"order": 8
+		},
+		"language": {
+			"name": "language",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "language",
+			"order": 9
+		},
+		"location": {
+			"name": "location",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "location",
+			"order": 10
+		},
+		"ACL": {
+			"name": "ACL",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "ACL",
+			"order": 11
+		},
+		"createdAt": {
+			"name": "createdAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdAt",
+			"order": 12
+		},
+		"updatedAt": {
+			"name": "updatedAt",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "updatedAt",
+			"order": 13
+		},
+		"creatorId": {
+			"name": "creatorId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "creatorId",
+			"order": 14
+		}
+	}
+}

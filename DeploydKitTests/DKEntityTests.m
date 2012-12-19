@@ -288,6 +288,43 @@
     
   [self deleteDefaultUser];    
 }
-
-
+/*
+- (void)testObjectAddToSet {
+    NSError *error = nil;
+    BOOL success = NO;
+    
+    [self createDefaultUserAndLogin];
+    
+    //Insert post
+    DKEntity *postObject = [DKEntity entityWithName:kDKEntityTestsPost];
+    NSMutableArray *values = [NSMutableArray arrayWithObjects:@"b", nil];
+    [postObject setObject:values forKey:kDKEntityTestsPostSharedTo];
+    success = [postObject save:&error];
+    STAssertTrue(success, nil);
+    STAssertNil(error, error.description);
+    
+    //Add to set (NOT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY WORK IN FUTURE VERSIONS)
+    error = nil;
+    [postObject addObjectToSet:@"d" forKey:kDKEntityTestsPostSharedTo];
+    [postObject addAllObjectsToSet:[NSArray arrayWithObjects:@"a", @"b", @"c", nil] forKey:kDKEntityTestsPostSharedTo];
+    [postObject addObjectToSet:@"1" forKey:kDKEntityTestsPostLocation];
+    success = [postObject save:&error];
+    STAssertTrue(success, nil);
+    STAssertNil(error, error.description);    
+    NSArray *list = [postObject objectForKey:kDKEntityTestsPostSharedTo];
+    NSArray *comp = [NSArray arrayWithObjects:@"b", @"d", @"a", @"c", nil];
+    STAssertEqualObjects(list, comp, nil);
+    list = [postObject objectForKey:kDKEntityTestsPostLocation];
+    comp = [NSArray arrayWithObjects:@"1", nil];
+    STAssertEqualObjects(list, comp, nil);
+        
+    //Delete post
+    error = nil;
+    success = [postObject delete:&error];
+    STAssertNil(error, @"delete post should not return error, did return %@", error);
+    STAssertTrue(success, @"delete post should have been successful (return YES)");
+    
+    [self deleteDefaultUser];
+}
+*/ 
 @end

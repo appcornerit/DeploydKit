@@ -13,7 +13,6 @@
 #import <Foundation/Foundation.h>
 
 @class DKEntity;
-//@class DKRelation;
 
 /**
  A DKEntity represents an object stored in the collection with the given name.
@@ -238,6 +237,28 @@
  @param amount The increment amount. Can also be negative
  */
 - (void)incrementKey:(NSString *)key byAmount:(NSNumber *)amount;
+
+/**
+ Adds the object to the list at `key`, if it is not already in the list.
+ (NOT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY WORK IN FUTURE VERSIONS)  
+ Appends the objects if a list exists at `key` and `object` is not already in that list, otherwise sets `key` to a single object array containing `object`. 
+ If the `key` exists, but is not a list, the entity save will fail. List may only contain *JSON* types.
+ @param object The object to add
+ @param key The list key
+ @warning The key must not include an `$` or `.` character
+ */
+//- (void)addObjectToSet:(id)object forKey:(NSString *)key;
+
+/**
+ Adds all objects to the list at `key`, if object is not already in the list.
+ (NOT WORK, NOT DOCUMENTED IN DEPLOYD 0.6.9v, MAY WORK IN FUTURE VERSIONS)  
+ Adds the objects to the list only if the objects do not already exist in the list and if `key` is a list, otherwise sets `key` to a list containting `objects`. 
+ If the `key` is present, but not a list, entity save will fail. All objects in the list must be *JSON* types.
+ @param objects The object list
+ @param key The list key
+ @warning The key must not include an `$` or `.` character
+ */
+//- (void)addAllObjectsToSet:(NSArray *)objects forKey:(NSString *)key;
 
 /**
  Resets the entity to it's last saved state

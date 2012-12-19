@@ -39,6 +39,21 @@
  */
 + (NSURL *)endpointForMethod:(NSString *)method;
 
+/** @name API Secret */
+
+/**
+ The API secret used for SecureUDID in DKChannel
+ @return Returns the API secret string
+ @exception NSInternalInconsistencyException Raises exception if API secret is not set
+ */
++ (NSString *)APISecret;
+
+/**
+ Set the API secret used for SecureUDID in DKChannel
+ @param secret The API secret
+ */
++ (void)setAPISecret:(NSString *)secret;
+
 /** @name Session id */
 
 /**

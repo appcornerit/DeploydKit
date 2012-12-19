@@ -1,0 +1,6 @@
+{
+	"type": "S3Bucket",
+	"bucket": "",
+	"key": "",
+	"secret": ""
+}

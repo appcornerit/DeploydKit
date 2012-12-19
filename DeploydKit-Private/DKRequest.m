@@ -219,7 +219,8 @@ DKSynthesize(cachePolicy)
 }
 
 -(NSString*)httpMethod:(NSString*)op{
-    if([op isEqualToString:@"save"] || [op isEqualToString:@"login"] || [op isEqualToString:@"logout"]) return @"POST";
+    if([op isEqualToString:@"save"] || [op isEqualToString:@"login"] ||
+       [op isEqualToString:@"logout"] || [op isEqualToString:@"apn"]) return @"POST";
     if([op isEqualToString:@"update"]) return @"PUT";
     if([op isEqualToString:@"delete"]) return @"DELETE";
     return @"GET"; //refresh/query/me

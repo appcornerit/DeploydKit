@@ -23,6 +23,7 @@ DKSynthesize(setMap)
 DKSynthesize(incMap)
 DKSynthesize(pushMap)
 DKSynthesize(pushAllMap)
+DKSynthesize(addToSetMap)
 DKSynthesize(pullAllMap)
 DKSynthesize(resultMap)
 DKSynthesize(loginMap)
@@ -39,6 +40,7 @@ DKSynthesize(loginMap)
     self.incMap = [NSMutableDictionary new];
     self.pushMap = [NSMutableDictionary new];
     self.pushAllMap = [NSMutableDictionary new];
+    self.addToSetMap = [NSMutableDictionary new];      
     self.pullAllMap = [NSMutableDictionary new];
     self.loginMap = [NSMutableDictionary new];
   }
@@ -86,6 +88,7 @@ DKSynthesize(loginMap)
           self.incMap.count +
           self.pushMap.count +
           self.pushAllMap.count +
+          self.addToSetMap.count +
           self.pullAllMap.count) > 0;
 }
 
@@ -94,6 +97,7 @@ DKSynthesize(loginMap)
   [self.incMap removeAllObjects];
   [self.pushMap removeAllObjects];
   [self.pushAllMap removeAllObjects];
+  [self.addToSetMap removeAllObjects];
   [self.pullAllMap removeAllObjects];
 }
 
@@ -251,6 +255,23 @@ DKSynthesize(loginMap)
   [self.pullAllMap setObject:objects forKey:key];
 }
 
+- (void)addObjectToSet:(id)object forKey:(NSString *)key {
+  [self addAllObjectsToSet:[NSArray arrayWithObject:object] forKey:key];
+}
+
+- (void)addAllObjectsToSet:(NSArray *)objects forKey:(NSString *)key {
+  NSMutableArray *list = [self.addToSetMap objectForKey:key];
+  if (list == nil) {
+    list = [NSMutableArray new];
+    [self.addToSetMap setObject:list forKey:key];
+  }
+  for (id obj in objects) {
+    if (![list containsObject:objects]) {
+        [list addObject:obj];
+    }
+  }
+}
+
 - (void)incrementKey:(NSString *)key {
   [self incrementKey:key byAmount:[NSNumber numberWithInteger:1]];
 }
@@ -313,13 +334,18 @@ DKSynthesize(loginMap)
         if (forbiddenChars == nil) {
             forbiddenChars = [NSCharacterSet characterSetWithCharactersInString:@"$."];
         }
-        
+        // Allowed use of $each
+        static NSArray* allowedKeys;
+        if (allowedKeys == nil) {
+            allowedKeys = [NSArray arrayWithObjects:@"$each",nil];
+        }
+    
         __block id (^validateKeys)(id obj);
         validateKeys = [^(id obj) {
             if ([obj isKindOfClass:[NSDictionary class]]) {
                 for (NSString *key in obj) {
                     NSRange range = [key rangeOfCharacterFromSet:forbiddenChars];
-                    if (range.location != NSNotFound) {
+                    if (range.location != NSNotFound && [allowedKeys indexOfObject:key] == NSNotFound) { 
                         [NSException raise:NSInvalidArgumentException
                                     format:@"Invalid object key '%@'. Keys may not contain '$' or '.'", key];
                     }
@@ -343,7 +369,6 @@ DKSynthesize(loginMap)
                 [requestDict setObject:validateKeys(value) forKey:key];
             }
         }else{
-    
             if (self.setMap.count > 0) {
                 for (id key in self.setMap) {
                     id value = [self.setMap objectForKey:key];
@@ -361,6 +386,14 @@ DKSynthesize(loginMap)
             }
             if (self.pullAllMap.count > 0) {
                 [DKEntity deploydCommands:self.pullAllMap operation:@"$pullAll" requestDict:requestDict];
+            }
+            if (self.addToSetMap.count > 0) {
+                NSMutableDictionary *addToSetDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];                
+                for (id key in self.addToSetMap) {
+                    id value = [self.addToSetMap objectForKey:key];
+                    [DKEntity deploydCommands:[NSMutableDictionary dictionaryWithObjectsAndKeys: value, key, nil] operation:@"$each" requestDict:addToSetDict];
+                }                
+                [requestDict setObject:validateKeys(addToSetDict) forKey:@"$addToSet"];
             }
         }
     

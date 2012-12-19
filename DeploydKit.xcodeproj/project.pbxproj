@@ -30,6 +30,10 @@
 		DC162319150BBC7E00F12198 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC830522150513A200D6AB1C /* UIKit.framework */; };
 		DC16231A150BBC8A00F12198 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC162310150BBA4900F12198 /* CoreGraphics.framework */; };
 		DC830523150513A200D6AB1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC830522150513A200D6AB1C /* UIKit.framework */; };
+		FF12E458166E9D5700BF63CE /* DKChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = FF12E456166E9D5700BF63CE /* DKChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF12E459166E9D5700BF63CE /* DKChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E457166E9D5700BF63CE /* DKChannel.m */; };
+		FF12E463166FF61A00BF63CE /* SecureUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = FF12E461166FF61A00BF63CE /* SecureUDID.h */; };
+		FF12E464166FF61A00BF63CE /* SecureUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FF12E462166FF61A00BF63CE /* SecureUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FFB5E4FD165ACFE800B0651C /* DeploydKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4DB165ACFE800B0651C /* DeploydKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E4FE165ACFE800B0651C /* DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4DC165ACFE800B0651C /* DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E4FF165ACFE800B0651C /* DKConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4DD165ACFE800B0651C /* DKConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,6 +91,10 @@
 		DC03846E14F68EA1000DADD6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		DC162310150BBA4900F12198 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DC830522150513A200D6AB1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FF12E456166E9D5700BF63CE /* DKChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKChannel.h; sourceTree = "<group>"; };
+		FF12E457166E9D5700BF63CE /* DKChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKChannel.m; sourceTree = "<group>"; };
+		FF12E461166FF61A00BF63CE /* SecureUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecureUDID.h; sourceTree = "<group>"; };
+		FF12E462166FF61A00BF63CE /* SecureUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureUDID.m; sourceTree = "<group>"; };
 		FFB5E4DB165ACFE800B0651C /* DeploydKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeploydKit-Prefix.pch"; sourceTree = "<group>"; };
 		FFB5E4DC165ACFE800B0651C /* DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeploydKit.h; sourceTree = "<group>"; };
 		FFB5E4DD165ACFE800B0651C /* DKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKConstants.h; sourceTree = "<group>"; };
@@ -200,6 +208,8 @@
 				FFB5E4E9165ACFE800B0651C /* DKQuery.m */,
 				FFB5E4EA165ACFE800B0651C /* DKQueryTableViewController.h */,
 				FFB5E4EB165ACFE800B0651C /* DKQueryTableViewController.m */,
+				FF12E456166E9D5700BF63CE /* DKChannel.h */,
+				FF12E457166E9D5700BF63CE /* DKChannel.m */,
 			);
 			path = DeploydKit;
 			sourceTree = "<group>";
@@ -207,6 +217,8 @@
 		FFB5E4EE165ACFE800B0651C /* DeploydKit-Private */ = {
 			isa = PBXGroup;
 			children = (
+				FF12E461166FF61A00BF63CE /* SecureUDID.h */,
+				FF12E462166FF61A00BF63CE /* SecureUDID.m */,
 				FFB5E4EF165ACFE800B0651C /* DKEntity-Private.h */,
 				FFB5E4F0165ACFE800B0651C /* DKQuery-Private.h */,
 				FFB5E4F1165ACFE800B0651C /* DKRequest.h */,
@@ -257,11 +269,13 @@
 				FFB5E512165ACFE800B0651C /* DKQueryTableViewController.h in Headers */,
 				FFB5E518165ACFE800B0651C /* DKEntity-Private.h in Headers */,
 				FFB5E51A165ACFE800B0651C /* DKRequest.h in Headers */,
+				FF12E458166E9D5700BF63CE /* DKChannel.h in Headers */,
 				FFB5E51D165ACFE800B0651C /* NSData+DeploydKit.h in Headers */,
 				FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */,
 				FFB5E526165ACFE800B0651C /* NSString+DeploydKit.h in Headers */,
 				FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */,
 				FFB5E519165ACFE800B0651C /* DKQuery-Private.h in Headers */,
+				FF12E463166FF61A00BF63CE /* SecureUDID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +417,8 @@
 				FFB5E527165ACFE800B0651C /* NSString+DeploydKit.m in Sources */,
 				FFB5E52A165ACFE800B0651C /* NSURLConnection+Timeout.m in Sources */,
 				FFB5E554165AD80500B0651C /* NSError+DeploydKit.m in Sources */,
+				FF12E459166E9D5700BF63CE /* DKChannel.m in Sources */,
+				FF12E464166FF61A00BF63CE /* SecureUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

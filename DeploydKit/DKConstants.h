@@ -53,4 +53,20 @@ typedef NSInteger DKRegexOption;
 #define kDKEntityUpdatedAtField @"updatedAt"
 #define kDKEntityCreatedAtField @"createdAt"
 #define kDKEntityCreatorIdField @"creatorId"
+//deployd collections for apn
+#define kDKRequestPushChannel @"apn"
+//deployd channel fields
+#define kDKEntityChannel @"channel"
+#define kDKEntityChannelUDID @"udid"
+#define kDKEntityChannelBadge @"badge"
+#define kDKEntityChannelPrivateChannels @"channels"
+#define kDKEntityChannelAppVersion @"appVersion"
+#define kDKEntityChannelDeviceToken @"deviceToken"
+#define kDKEntityChannelTimeZone @"timeZone"
+#define kDKEntityChannelLocale @"locale"
+#define kDKEntityChannelLanguage @"language"
+#define kDKEntityChannelDeviceModel @"deviceModel"
+#define kDKEntityChannelDeviceSystem @"deviceSystem"
+#define kDKEntityChannelLocation @"location"
+
 
