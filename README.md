@@ -43,11 +43,11 @@ NSArray *results = [query findAll];
 ```
     
 #### Files
-Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket resource for Deployd on DeploydKitTests_Deployd 
+Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket resource for Deployd on Deployd-Modules 
 
 ```objc
 // Saving
-//filename generated server side with DeploydKit s3-bucket resource, or chosen by the client using with Deployd deployd/dpd-s3
+//filename generated server side with DeploydKit s3-bucket module, or chosen by the client using with Deployd deployd/dpd-s3
 DKFile *file = [DKFile fileWithName:nil data:data];
 [file save];
 // Loading
@@ -55,6 +55,10 @@ DKFile *loadMe = [DKFile fileWithName:@"SomeFileName"];
 NSData *data =[loadMe loadData:&error];
 ```
 
-### TODO
-- Add `DKChannel` class for push notifications and async messaging
+#### Push notifications
+DKChannel is a representation of an installation persisted that defines methods for push notification that can be sent from a client device, require apn module on Deployd-Modules.
+This [tutorial](https://parse.com/tutorials/ios-push-notifications) from parse.com provides a step-by-step guide to configuring iOS application for push notifications.
+Refer to the node-apn documentation on [node-apn](https://github.com/argon/node-apn) to configure apn module on Deployd-Modules.
+
+
 
