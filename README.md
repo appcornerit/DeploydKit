@@ -26,6 +26,7 @@ Link to DeploydKit and import `<DeploydKit/DeploydKit.h>`. Now you only need to 
 Here are some examples on how to use DeploydKit, this is in no way the complete feature set.
 
 #### Entites
+DKEntity supports all of Deployd's commands for storing and updating an object in a collection.
 
 ```objc
 // Saving
@@ -37,7 +38,7 @@ DKEntity *entity = [DKEntity entityWithName:@"user"];
 ```
 
 #### Authenticating Users
-DKEntity defines the following methods to authenticate with Deployd User Collection: 
+DKEntity defines the following methods to authenticate with Deployd's User collection: 
 
 ```objc
 // Log in a user with their username and password
@@ -51,8 +52,10 @@ DKEntity defines the following methods to authenticate with Deployd User Collect
 ```
 
 #### Queries
+DKQuery supports all of Deployd's operators and Deployd's custom commands for querying Deployd's collections.
 
 ```objc
+// Sample query for $regex command that allows you to specify a regular expression to match a string property.
 DKQuery *query = [DKQuery queryWithEntityName:@"SearchableEntity"];
 [query whereKey:@"text" matchesRegex:@"\\s+words"];
 NSArray *results = [query findAll];
