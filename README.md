@@ -9,7 +9,7 @@ Thanks to Erik for your great work with DataKit and thanks to Deployd team for y
 
 ### Server Configuration
 
-Refer to the great documentation on [Deployd.com](http://docs.deployd.com)
+Refer to [Deployd.com](http://docs.deployd.com) documentation.
 
 ### Integrate the SDK
 
@@ -60,7 +60,7 @@ NSData *data =[loadMe loadData:&error];
 #### Push notifications
 DKChannel is a representation of an installation persisted that defines methods for push notification that can be sent from a client device, require apn module on Deployd-Modules.
 This [tutorial](https://parse.com/tutorials/ios-push-notifications) from parse.com provides a step-by-step guide to configuring iOS application for push notifications.
-Refer to the node-apn documentation on [node-apn](https://github.com/argon/node-apn) to configure apn module on Deployd-Modules.
+Refer to [node-apn](https://github.com/argon/node-apn) documentation to configure apn module on Deployd-Modules.
 
 
 
