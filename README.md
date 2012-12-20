@@ -71,7 +71,7 @@ DKFile *loadMe = [DKFile fileWithName:@"SomeFileName"];
 NSData *data =[loadMe loadData:&error];
 ```
 
-#### Push notifications
+#### Push notifications 
 DKChannel is a representation of an installation persisted that defines methods for push notification that can be sent from a client device, require apn module on Deployd-Modules.
 This [tutorial](https://parse.com/tutorials/ios-push-notifications) from parse.com provides a step-by-step guide to configuring iOS application for push notifications.
 Refer to [node-apn](https://github.com/argon/node-apn) documentation to configure apn module on Deployd-Modules.
