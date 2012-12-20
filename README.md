@@ -17,7 +17,7 @@ Link to DeploydKit and import `<DeploydKit/DeploydKit.h>`. Now you only need to 
 
 ```objc
 [DeploydKit setAPIEndpoint:@"http://localhost:2403/"];
-//key difficult to guess, used in DKChannel for configure secureudid (http://secureudid.org)  
+// key difficult to guess, used in DKChannel for configure secureudid (http://secureudid.org)  
 [DeploydKit setAPISecret:@"4333f0a9d92257804a8c396677f9f8e4c8313e6e1c85bd244192c743ce898285"];
 ```
 
@@ -37,16 +37,16 @@ DKEntity *entity = [DKEntity entityWithName:@"user"];
 ```
 
 #### Authenticating Users
-DKEntity defines the following methods to authenticate with User Collection: 
+DKEntity defines the following methods to authenticate with Deployd User Collection: 
 
 ```objc
-//Log in a user with their username and password.
+// Log in a user with their username and password
 - (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)password;
 
-//Logging out for the current user
+// Logging out for the current user
 - (BOOL)logout:(NSError **)error;
 
-//Checks if the current user is logged
+// Checks if the current user is logged
 - (BOOL)loggedUser:(NSError **)error;
 ```
 
@@ -63,7 +63,7 @@ Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket reso
 
 ```objc
 // Saving
-//filename generated server side with DeploydKit s3-bucket module, or chosen by the client using with Deployd deployd/dpd-s3
+// filename generated server side with DeploydKit s3-bucket module, or chosen by the client using with Deployd deployd/dpd-s3
 DKFile *file = [DKFile fileWithName:nil data:data];
 [file save];
 // Loading
