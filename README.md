@@ -35,7 +35,21 @@ DKEntity *entity = [DKEntity entityWithName:@"user"];
 [entity setObject:[NSNumber numberWithInteger:10] forKey:@"credits"];
 [entity save];
 ```
-    
+
+#### Authenticating Users
+DKEntity defines the following methods to authenticate with User Collection: 
+
+```objc
+//Log in a user with their username and password.
+- (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)password;
+
+//Logging out for the current user
+- (BOOL)logout:(NSError **)error;
+
+//Checks if the current user is logged
+- (BOOL)loggedUser:(NSError **)error;
+```
+
 #### Queries
 
 ```objc
@@ -45,7 +59,7 @@ NSArray *results = [query findAll];
 ```
     
 #### Files
-Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket resource for Deployd on Deployd-Modules 
+Require a Amazon Simple Storage Service (Amazon S3) configured on s3-bucket resource for Deployd on Deployd-Modules. 
 
 ```objc
 // Saving
