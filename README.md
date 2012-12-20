@@ -17,6 +17,8 @@ Link to DeploydKit and import `<DeploydKit/DeploydKit.h>`. Now you only need to 
 
 ```objc
 [DeploydKit setAPIEndpoint:@"http://localhost:2403/"];
+//key difficult to guess, used in DKChannel for configure secureudid (http://secureudid.org)  
+[DeploydKit setAPISecret:@"4333f0a9d92257804a8c396677f9f8e4c8313e6e1c85bd244192c743ce898285"];
 ```
 
 ### Start Coding
