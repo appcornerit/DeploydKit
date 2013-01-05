@@ -10,8 +10,6 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 
 /**
  Helper class for displaying the network activity indicator

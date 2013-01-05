@@ -10,8 +10,6 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSURLConnection (Timeout)
 
 + (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response timeout:(NSTimeInterval)timeout error:(NSError **)error;

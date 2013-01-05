@@ -10,12 +10,12 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-
 #import "DKManager.h"
+#import "DKReachability.h"
+#import "DKConstants.h"
 #import "DKEntity.h"
 #import "DKQuery.h"
 #import "DKFile.h"
 #import "DKChannel.h"
-#import "DKConstants.h"
 #import "DKQueryTableViewController.h"
 #import "DKNetworkActivity.h"

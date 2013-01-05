@@ -11,14 +11,12 @@
 //
 
 #import "DKQueryTests.h"
-
 #import "DKEntity.h"
 #import "DKEntity-Private.h"
 #import "DKQuery.h"
 #import "DKQuery-Private.h"
 #import "DKManager.h"
 #import "DKTests.h"
-
 #import "DKEntityTests.h"
 
 @implementation DKQueryTests

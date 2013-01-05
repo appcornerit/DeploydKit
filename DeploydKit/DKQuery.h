@@ -47,6 +47,11 @@
  */
 @property (nonatomic, assign) DKCachePolicy cachePolicy;
 
+/**
+ The age after which a cached value will be ignored
+ */
+@property (readwrite, assign) NSTimeInterval maxCacheAge;
+
 /** @name Creating and Initializing Queries */
 
 /**
@@ -326,6 +331,13 @@
  @param block The result callback block
  */
 //- (void)countAllInBackgroundWithBlock:(void (^)(NSUInteger count, NSError *error))block;
+
+/** @name Controlling Caching Behavior (only used for GET requests)*/
+
+/**
+ Returns whether there is a cached result for this query
+ */
+- (BOOL)hasCachedResult;
 
 /** @name Resetting Conditions */
 

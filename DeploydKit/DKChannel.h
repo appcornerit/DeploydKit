@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 clooket.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "DKEntity.h"
 #import "DKQuery.h"
 

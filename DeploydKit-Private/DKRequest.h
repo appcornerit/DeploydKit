@@ -10,8 +10,6 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "DKConstants.h"
 
 enum {
@@ -23,11 +21,12 @@ typedef NSInteger DKResponseStatus;
 @interface DKRequest : NSObject
 @property (nonatomic, copy, readonly) NSString *endpoint;
 @property (nonatomic, assign) DKCachePolicy cachePolicy;
+@property (readwrite, assign) NSTimeInterval maxCacheAge;
 
 + (DKRequest *)request;
 
 + (BOOL)canParseResponse:(NSHTTPURLResponse *)response;
-+ (id)parseResponse:(NSHTTPURLResponse *)response withData:(NSData *)data error:(NSError **)error;
++ (id)parseResponse:(NSHTTPURLResponse *)response withData:(NSData *)data error:(NSError **)error isCached:(BOOL)isCached;
 
 - (id)initWithEndpoint:(NSString *)absoluteString;
 
@@ -35,6 +34,7 @@ typedef NSInteger DKResponseStatus;
 - (id)sendRequestWithObject:(id)JSONObject method:(NSString *)apiMethod entity:(NSString *)entityName error:(NSError **)error;
 - (id)sendRequestWithData:(NSData *)data method:(NSString *)apiMethod entity:(NSString *)entityName error:(NSError **)error;
 
+- (BOOL)hasCachedResult;
 @end
 
 @interface DKRequest (Wrapping)
@@ -47,6 +47,8 @@ typedef NSInteger DKResponseStatus;
 
 @interface DKRequest (Logging)
 
-+ (void)logData:(NSData *)data isOut:(BOOL)isOut;
++ (void)logData:(NSData *)data isOut:(BOOL)isOut isCached:(BOOL)isCached;
 
 @end
+
+

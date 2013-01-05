@@ -10,8 +10,6 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSError (DeploydKit)
 
 + (void)writeToError:(NSError **)error code:(NSInteger)code description:(NSString *)desc original:(NSError *)originalError;

@@ -11,7 +11,6 @@
 //
 
 #import "DKQueryTableViewController.h"
-
 #import "DKEntity.h"
 
 @interface DKQueryTableViewController ()
@@ -29,17 +28,6 @@
 @end
 
 @implementation DKQueryTableViewController
-DKSynthesize(entityName)
-DKSynthesize(displayedTitleKey)
-DKSynthesize(displayedImageKey)
-DKSynthesize(objectsPerPage)
-DKSynthesize(isLoading)
-DKSynthesize(objects)
-DKSynthesize(searchBar)
-DKSynthesize(searchOverlay)
-DKSynthesize(searchTextChanged)
-DKSynthesize(hasMore)
-DKSynthesize(currentOffset)
 
 - (id)initWithEntityName:(NSString *)entityName {
   return [self initWithStyle:UITableViewStylePlain entityName:entityName];
@@ -315,7 +303,6 @@ DKSynthesize(currentOffset)
 @end
 
 @implementation DKEntityTableNextPageCell
-DKSynthesize(activityAccessoryView)
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -12,16 +12,14 @@
 
 #import "DKRequest.h"
 #import "DKManager.h"
-#import "NSError+DeploydKit.h"
 #import "DKNetworkActivity.h"
-#import "NSURLConnection+Timeout.h"
-
+#import "EGOCache.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface DKRequest ()
-@property (nonatomic, copy, readwrite) NSString *endpoint;
-
--(NSString*)httpMethod:(NSString*)op;
-
+    @property (nonatomic, copy, readwrite) NSString *endpoint;
+    @property (nonatomic, copy, readwrite) NSString* keyCache;
+    -(NSString*)httpMethod:(NSString*)op;
 @end
 
 // DEVNOTE: Allow untrusted certs in debug version.
@@ -37,8 +35,6 @@
 #endif
 
 @implementation DKRequest
-DKSynthesize(endpoint)
-DKSynthesize(cachePolicy)
 
 + (DKRequest *)request {
   return [[self alloc] init];
@@ -53,6 +49,7 @@ DKSynthesize(cachePolicy)
   if (self) {
     self.endpoint = absoluteString;
     self.cachePolicy = DKCachePolicyIgnoreCache;
+    self.maxCacheAge = [EGOCache globalCache].defaultTimeoutInterval;     
   }
   return self;
 }
@@ -105,7 +102,6 @@ DKSynthesize(cachePolicy)
   // https://devforums.apple.com/thread/25282
   req.timeoutInterval = 20.0;
   req.HTTPMethod = [self httpMethod:apiMethod];
-  req.cachePolicy = self.cachePolicy;
     
   // Log request
   if ([DKManager requestLogEnabled]) {
@@ -120,7 +116,7 @@ DKSynthesize(cachePolicy)
       [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
       
       // Log request
-      [isa logData:bodyData isOut:YES];
+      [isa logData:bodyData isOut:YES isCached:NO];
   }
   else{
       // Log
@@ -128,11 +124,6 @@ DKSynthesize(cachePolicy)
           NSLog(@"[OUT EMPTY]");
       }
   }
- 
-  //NSString* sid = [DKManager sessionId]?[DKManager sessionId]:@"";
-  //NSString* sidCookie = @"sid=";
-  //sidCookie = [sidCookie stringByAppendingString:sid];
-  //[req setValue:sidCookie forHTTPHeaderField:@"Cookie"];
   
   // DEVNOTE: Allow untrusted certs in debug version.
   // This has to be excluded in production versions - private API!
@@ -140,13 +131,33 @@ DKSynthesize(cachePolicy)
   [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:URL.host];
 #endif
   
-  [DKNetworkActivity begin];
-  
   NSError *requestError = nil;
   NSHTTPURLResponse *response = nil;
-  NSData *result = [NSURLConnection sendSynchronousRequest:req returningResponse:&response timeout:20.0 error:&requestError];
-  
-  [DKNetworkActivity end];
+  NSData *result = nil;
+  BOOL loadFromCache = NO;
+    
+  switch (self.cachePolicy) {
+    case DKCachePolicyIgnoreCache:
+        result = [self sendSynchronousRequest:req returningResponse:&response error:&requestError];
+        break;
+    case DKCachePolicyUseCacheElseLoad:
+        if([req.HTTPMethod isEqualToString:@"GET"]){
+            result = [[EGOCache globalCache] dataForKey:self.keyCache?self.keyCache:[self md5:entityName]];
+            loadFromCache = YES;
+        }
+        if(!result){
+            result = [self sendSynchronousRequest:req returningResponse:&response error:&requestError];
+            loadFromCache = NO;
+        }
+        break;
+    case DKCachePolicyUseCacheIfOffline:
+        if(![DKManager endpointReachable] && [req.HTTPMethod isEqualToString:@"GET"]){
+            result = [[EGOCache globalCache] dataForKey:self.keyCache?self.keyCache:[self md5:entityName]];
+            loadFromCache = YES;
+        }else{
+            result = [self sendSynchronousRequest:req returningResponse:&response error:&requestError];
+        }
+  }
   
   // Check for request errors
   if (requestError != nil) {
@@ -157,7 +168,28 @@ DKSynthesize(cachePolicy)
     return nil;
   }
   
-  return [isa parseResponse:response withData:result error:error];
+  if([req.HTTPMethod isEqualToString:@"GET"] && !loadFromCache) {
+     self.keyCache = [self md5:entityName];
+     [[EGOCache globalCache] setData:result forKey:self.keyCache withTimeoutInterval:self.maxCacheAge];
+  }
+    
+  return [isa parseResponse:response withData:result error:error isCached:loadFromCache];
+}
+
+- (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error {
+    // Start network activity indicator
+    [DKNetworkActivity begin];
+    
+    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:response timeout:20.0 error:error];
+    
+    // End network activity
+    [DKNetworkActivity end];
+    return data;
+}
+
+- (BOOL)hasCachedResult{
+    if(!self.keyCache) return NO;
+    return [[EGOCache globalCache] hasCacheForKey:self.keyCache];
 }
 
 + (BOOL)canParseResponse:(NSHTTPURLResponse *)response {
@@ -165,8 +197,8 @@ DKSynthesize(cachePolicy)
   return (code == 200 || code == 400);
 }
 
-+ (id)parseResponse:(NSHTTPURLResponse *)response withData:(NSData *)data error:(NSError **)error {
-  if (![self canParseResponse:response]) {
++ (id)parseResponse:(NSHTTPURLResponse *)response withData:(NSData *)data error:(NSError **)error isCached:(BOOL)isCached {
+  if (!isCached && ![self canParseResponse:response]) {
     [NSError writeToError:error
                      code:DKErrorUnknownStatus
               description:[NSString stringWithFormat:NSLocalizedString(@"Unknown response (%i)", nil), response.statusCode]
@@ -174,9 +206,9 @@ DKSynthesize(cachePolicy)
   }
   else {
     // Log response
-    [self logData:data isOut:NO];
+      [self logData:data isOut:NO isCached:isCached];
     
-    if (response.statusCode == DKResponseStatusSuccess) {
+    if (isCached || response.statusCode == DKResponseStatusSuccess) {
       id resultObj = nil;
       NSError *JSONError = nil;
       
@@ -226,6 +258,20 @@ DKSynthesize(cachePolicy)
     return @"GET"; //refresh/query/me
 }
 
+- (NSString *)md5:(NSString*) str
+{
+    const char *cStr = [str UTF8String];
+    unsigned char result[16];
+    CC_MD5( cStr, strlen(cStr), result ); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];  
+}
+
 @end
 
 @implementation DKRequest (Wrapping)
@@ -267,15 +313,15 @@ DKSynthesize(cachePolicy)
 
 @implementation DKRequest (Logging)
 
-+ (void)logData:(NSData *)data isOut:(BOOL)isOut {
++ (void)logData:(NSData *)data isOut:(BOOL)isOut isCached:(BOOL)isCached{
   if ([DKManager requestLogEnabled]) {
     if (data.length > 0) {
       NSData *logData = data;
       if (data.length > 1000) {
         logData = [data subdataWithRange:NSMakeRange(0, 1000)];
       }
-      NSLog(@"[%@] %@",
-            (isOut ? @"OUT" : @"IN"),
+      NSLog(@"[%@%@] %@",
+            (isOut ? @"OUT" : @"IN"),(isCached ? @" CACHE" : @""),
             [[NSString alloc] initWithData:logData encoding:NSUTF8StringEncoding]);
     }
   }

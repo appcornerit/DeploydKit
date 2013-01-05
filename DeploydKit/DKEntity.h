@@ -10,7 +10,7 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "DKConstants.h"
 
 @class DKEntity;
 
@@ -57,6 +57,16 @@
   User creation about the entity.
  */
 @property (nonatomic, readonly) id creatorId;
+
+/**
+ The cache policy to use for the query
+ */
+@property (nonatomic, assign) DKCachePolicy cachePolicy;
+
+/**
+ The age after which a cached value will be ignored
+ */
+@property (readwrite, assign) NSTimeInterval maxCacheAge;
 
 /** @name Creating and Initializing Entities */
 
@@ -274,7 +284,7 @@
  @param password The password for login the user 
  @return `YES` on success, `NO` on error
  */
-- (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)pssword;
+- (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)password;
 
 /**
  Log out a user

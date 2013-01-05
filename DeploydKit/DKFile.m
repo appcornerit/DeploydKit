@@ -11,24 +11,20 @@
 //
 
 #import "DKFile.h"
-
 #import "DKManager.h"
 #import "DKRequest.h"
 #import "DKNetworkActivity.h"
 #import "NSURLConnection+Timeout.h"
+#import "EGOCache.h"
 
 @interface DKFile ()
-@property (nonatomic, assign, readwrite) BOOL isVolatile;
-@property (nonatomic, assign, readwrite) BOOL isLoading;
-@property (nonatomic, copy, readwrite) NSString *name;
-@property (nonatomic, strong, readwrite) NSData *data;
+    @property (nonatomic, assign, readwrite) BOOL isVolatile;
+    @property (nonatomic, assign, readwrite) BOOL isLoading;
+    @property (nonatomic, copy, readwrite) NSString *name;
+    @property (nonatomic, strong, readwrite) NSData *data;
 @end
 
 @implementation DKFile
-DKSynthesize(isVolatile)
-DKSynthesize(isLoading)
-DKSynthesize(name)
-DKSynthesize(data)
 
 + (DKFile *)fileWithData:(NSData *)data {
   return [[self alloc] initWithName:nil data:data];
@@ -48,6 +44,8 @@ DKSynthesize(data)
     self.data = data;
     self.name = name;
     self.isVolatile = YES;
+    self.cachePolicy = DKCachePolicyIgnoreCache;
+    self.maxCacheAge = [EGOCache globalCache].defaultTimeoutInterval;
   }
   return self;
 }
@@ -158,8 +156,8 @@ DKSynthesize(data)
     
   // Create url request
   NSString *ep = [[DKManager APIEndpoint] stringByAppendingPathComponent:kDKRequestFileHandler];
-  if (name_.length > 0) {
-      ep = [ep stringByAppendingPathComponent:name_];
+  if (self.name.length > 0) {
+      ep = [ep stringByAppendingPathComponent:self.name];
   }
     
   NSURL *URL = [NSURL URLWithString:ep];
@@ -184,42 +182,41 @@ DKSynthesize(data)
   [DKNetworkActivity begin];
   
   // Save synchronous
-    NSError *reqError = nil;
-    NSHTTPURLResponse *response = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&response timeout:20.0 error:&reqError];
+  NSError *reqError = nil;
+  NSHTTPURLResponse *response = nil;
+  NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&response timeout:20.0 error:&reqError];
     
-    // End network activity
-    self.isLoading = NO;
-    [DKNetworkActivity end];
+  // End network activity
+  self.isLoading = NO;
+  [DKNetworkActivity end];
     
-    [DKRequest logData:data isOut:NO];
+  [DKRequest logData:data isOut:NO isCached:NO];
     
-    // Parse response
-    id resultObj = nil;
-    NSError *JSONError = nil;
-    // A successful operation must not always return a JSON body
-    if (data.length > 0) {
-        resultObj = [NSJSONSerialization JSONObjectWithData:data
-                                                    options:NSJSONReadingAllowFragments
-                                                      error:&JSONError];
-    }
-    if (JSONError != nil) {   //TODO: check reqError
-        [NSError writeToError:error
-                         code:DKErrorInvalidResponse
-                  description:NSLocalizedString(@"Could not deserialize JSON response", nil)
-                     original:JSONError];
-    }
-
-    if([resultObj isKindOfClass:[NSDictionary class]]){
-        self.name = [resultObj objectForKey:kDKRequestAssignedFileName];
-        if(!self.name) return NO;
-        self.isVolatile = NO;
-        if(resultBlock) resultBlock(YES,nil);
-        return YES;
-    }
-    else{
-        if(resultBlock) resultBlock(NO,*error);
-    }
+  // Parse response
+  id resultObj = nil;
+  NSError *JSONError = nil;
+  // A successful operation must not always return a JSON body
+  if (data.length > 0) {
+    resultObj = [NSJSONSerialization JSONObjectWithData:data
+                                                options:NSJSONReadingAllowFragments
+                                                  error:&JSONError];
+  }
+  if (JSONError != nil) {   //TODO: check reqError
+    [NSError writeToError:error
+                     code:DKErrorInvalidResponse
+              description:NSLocalizedString(@"Could not deserialize JSON response", nil)
+                 original:JSONError];
+  }
+  if([resultObj isKindOfClass:[NSDictionary class]]){
+    self.name = [resultObj objectForKey:kDKRequestAssignedFileName];
+    if(!self.name) return NO;
+    self.isVolatile = NO;
+    if(resultBlock) resultBlock(YES,nil);
+    return YES;
+  }
+  else{
+    if(resultBlock) resultBlock(NO,*error);
+  }
   
   return NO;
 }
@@ -240,7 +237,7 @@ DKSynthesize(data)
 - (NSData *)loadSynchronous:(BOOL)loadSync //TODO: loadSync ignored
                 resultBlock:(void (^)(BOOL success, NSData *data, NSError *error))resultBlock
                       error:(NSError **)error {
-  // Check for file name
+  // Check file name
   if (self.name.length == 0) {
     [NSException raise:NSInternalInconsistencyException
                 format:NSLocalizedString(@"Invalid filename", nil)];
@@ -249,8 +246,8 @@ DKSynthesize(data)
   
   // Create url request
   NSString *ep = [[DKManager APIEndpoint] stringByAppendingPathComponent:kDKRequestFileHandler];
-  if (name_.length > 0) {
-    ep = [ep stringByAppendingPathComponent:name_];
+  if (self.name.length > 0) {
+    ep = [ep stringByAppendingPathComponent:self.name];
   }
   NSURL *URL = [NSURL URLWithString:ep];
     
@@ -263,36 +260,69 @@ DKSynthesize(data)
     NSLog(@"[FILE OUT] load name '%@'", self.name);
   }
   
-  // Start network activity indicator
-  self.isLoading = YES;
-  [DKNetworkActivity begin];
-  
   // Load sync
-    NSError *reqError = nil;
-    NSHTTPURLResponse *response = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&response timeout:20.0 error:&reqError];
+  NSError *reqError = nil;
+  NSHTTPURLResponse *response = nil;
+  NSData *result = nil;
+  BOOL loadFromCache = NO;
+    
+  switch (self.cachePolicy) {
+    case DKCachePolicyIgnoreCache:
+        result = [self sendSynchronousRequest:req returningResponse:&response error:&reqError];
+        break;
+    case DKCachePolicyUseCacheElseLoad:
+        if([req.HTTPMethod isEqualToString:@"GET"]){
+            result = [[EGOCache globalCache] dataForKey:self.name];
+            loadFromCache = YES;
+        }
+        if(!result){
+            result = [self sendSynchronousRequest:req returningResponse:&response error:&reqError];
+            loadFromCache = NO;
+        }
+        break;
+    case DKCachePolicyUseCacheIfOffline:
+        if(![DKManager endpointReachable] && [req.HTTPMethod isEqualToString:@"GET"]){
+            result = [[EGOCache globalCache] dataForKey:self.name];
+            loadFromCache = YES;
+        }else{
+            result = [self sendSynchronousRequest:req returningResponse:&response error:&reqError];
+        }
+  }
+    
+  if ([DKManager requestLogEnabled]) {
+    NSLog(@"[FILE IN%@] loaded size '%u' byte",(loadFromCache ? @" CACHE" : @""),result?result.length:0);
+  }
+    
+  if(!loadFromCache) {
+    [[EGOCache globalCache] setData:result forKey:self.name withTimeoutInterval:self.maxCacheAge];
+  }
+    
+  if (loadFromCache || response.statusCode == 200) {
+    self.isVolatile = NO;
+    if(resultBlock) resultBlock(YES,result,nil);
+    return result;
+  }
+  else {
+    if (error != NULL) {
+        *error = reqError;
+        if(resultBlock) resultBlock(NO,result,*error);
+    }
+  }
+
+  return nil;
+}
+
+- (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error {
+    // Start network activity indicator
+    self.isLoading = YES;
+    [DKNetworkActivity begin];
+    
+    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:response timeout:20.0 error:error];
     
     // End network activity
     self.isLoading = NO;
     [DKNetworkActivity end];
-    
-    if ([DKManager requestLogEnabled]) {
-        NSLog(@"[FILE IN] loaded size '%u' byte", data?data.length:0);
-    }
-    
-    if (response.statusCode == 200) {
-      self.isVolatile = NO;
-      if(resultBlock) resultBlock(YES,data,nil);
-      return data;
-    }
-    else {
-      if (error != NULL) {
-        *error = reqError;
-        if(resultBlock) resultBlock(NO,data,*error);
-      }
-    }
-
-  return nil;
+    return data;
 }
 
 - (NSData *)loadData {

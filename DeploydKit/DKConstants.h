@@ -10,15 +10,14 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #define kDKErrorDomain @"DKErrorDomain"
 
 enum {
-  DKCachePolicyIgnoreCache = NSURLRequestReloadIgnoringLocalCacheData,
-  DKCachePolicyUseCacheElseLoad = NSURLRequestReturnCacheDataElseLoad,
-  DKCachePolicyUseCacheDontLoad = NSURLRequestReturnCacheDataDontLoad
+  DKCachePolicyIgnoreCache = 0,
+  DKCachePolicyUseCacheIfOffline = 1,
+  DKCachePolicyUseCacheElseLoad = 2
 };
+
 typedef NSInteger DKCachePolicy;
 
 enum {

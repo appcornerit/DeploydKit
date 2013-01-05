@@ -10,8 +10,7 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import "DKConstants.h"
 
 /**
  Represents a block of binary data.
@@ -37,6 +36,16 @@
  The file data
  */
 @property (nonatomic, strong, readonly) NSData *data;
+
+/**
+ The cache policy to use for the query
+ */
+@property (nonatomic, assign) DKCachePolicy cachePolicy;
+
+/**
+ The age after which a cached value will be ignored
+ */
+@property (readwrite, assign) NSTimeInterval maxCacheAge;
 
 /** @name Creating and Initializing Files */
 

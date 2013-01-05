@@ -15,18 +15,9 @@
 #import "DKRequest.h"
 #import "DKConstants.h"
 #import "DKManager.h"
+#import "EGOCache.h"
 
 @implementation DKEntity
-
-DKSynthesize(entityName)
-DKSynthesize(setMap)
-DKSynthesize(incMap)
-DKSynthesize(pushMap)
-DKSynthesize(pushAllMap)
-DKSynthesize(addToSetMap)
-DKSynthesize(pullAllMap)
-DKSynthesize(resultMap)
-DKSynthesize(loginMap)
 
 + (DKEntity *)entityWithName:(NSString *)entityName {
   return [[self alloc] initWithName:entityName];
@@ -43,6 +34,8 @@ DKSynthesize(loginMap)
     self.addToSetMap = [NSMutableDictionary new];      
     self.pullAllMap = [NSMutableDictionary new];
     self.loginMap = [NSMutableDictionary new];
+    self.cachePolicy = DKCachePolicyIgnoreCache;
+    self.maxCacheAge = [EGOCache globalCache].defaultTimeoutInterval;
   }
   return self;
 }
@@ -143,7 +136,8 @@ DKSynthesize(loginMap)
   
   // Send request synchronously
   DKRequest *request = [DKRequest request];
-  request.cachePolicy = DKCachePolicyIgnoreCache;
+  request.cachePolicy = self.cachePolicy;
+  request.maxCacheAge = self.maxCacheAge;
   NSError *requestError = nil;
   id resultMap = [request sendRequestWithObject:requestDict method:@"refresh" entity:[self.entityName stringByAppendingPathComponent:self.entityId] error:&requestError];
   if (requestError != nil) {
@@ -291,9 +285,9 @@ DKSynthesize(loginMap)
   return [NSString stringWithFormat:@"<%@: %p %@> %@", NSStringFromClass(isa), self, self.entityId, self.resultMap];
 }
 
-- (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)pssword{
+- (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)password{
     [self.loginMap setObject:username forKey:kDKEntityUserName];
-    [self.loginMap setObject:pssword forKey:kDKEntityUserPassword];    
+    [self.loginMap setObject:password forKey:kDKEntityUserPassword];
     return [self sendAction:@"login" error:error];
 }
 
@@ -399,7 +393,8 @@ DKSynthesize(loginMap)
     
         // Send request synchronously
         DKRequest *request = [DKRequest request];
-        request.cachePolicy = DKCachePolicyIgnoreCache;
+        request.cachePolicy = self.cachePolicy;
+        request.maxCacheAge = self.maxCacheAge;
     
         NSString* actionUri = self.entityName;
         NSString *oid = self.entityId;

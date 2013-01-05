@@ -16,6 +16,7 @@
 #import "DKEntity.h"
 #import "DKEntity-Private.h"
 #import "DKManager.h"
+#import "EGOCache.h"
 
 @interface DKQueryConditionProxy : NSProxy
 
@@ -24,16 +25,6 @@
 @end
 
 @implementation DKQuery
-DKSynthesize(entityName)
-DKSynthesize(limit)
-DKSynthesize(limitRecursion)
-DKSynthesize(skip)
-DKSynthesize(cachePolicy)
-DKSynthesize(queryMap)
-DKSynthesize(sort)
-DKSynthesize(ors)
-DKSynthesize(ands)
-DKSynthesize(fieldInclExcl)
 
 + (DKQuery *)queryWithEntityName:(NSString *)entityName {
   return [[self alloc] initWithEntityName:entityName];
@@ -49,6 +40,7 @@ DKSynthesize(fieldInclExcl)
     self.ands = [NSMutableArray new];
     self.fieldInclExcl = [NSMutableDictionary new];
     self.cachePolicy = DKCachePolicyIgnoreCache;
+    self.maxCacheAge = [EGOCache globalCache].defaultTimeoutInterval;
   }
   return self;
 }
@@ -242,11 +234,12 @@ DKSynthesize(fieldInclExcl)
   }
     
   // Send request synchronously
-  DKRequest *request = [DKRequest request];
-  request.cachePolicy = self.cachePolicy;
+  self.request = [DKRequest request];
+  self.request.cachePolicy = self.cachePolicy;
+  self.request.maxCacheAge = self.maxCacheAge;
     
   NSError *requestError = nil;
-  id results = [request sendRequestWithObject:requestDict method:@"query" entity:queryParams error:&requestError];
+  id results = [self.request sendRequestWithObject:requestDict method:@"query" entity:queryParams error:&requestError];
   if (requestError != nil) {
     if (error != nil) {
       *error = requestError;
@@ -333,6 +326,11 @@ DKSynthesize(fieldInclExcl)
       });
     }
   });
+}
+
+- (BOOL)hasCachedResult{
+    if(!self.request) return NO;
+    return [self.request hasCachedResult];
 }
 
 @end

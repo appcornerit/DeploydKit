@@ -11,6 +11,7 @@
 //
 
 #import "DKQuery.h"
+#import "DKRequest.h"
 
 @interface DKQuery () // CLS_EXT
 @property (nonatomic, copy, readwrite) NSString *entityName;
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *ors;
 @property (nonatomic, strong) NSMutableArray *ands;
 @property (nonatomic, strong) NSMutableDictionary *fieldInclExcl;
+@property (nonatomic, strong) DKRequest *request;
 
 - (id)find:(NSError **)error one:(BOOL)findOne count:(NSUInteger *)countOut;
 

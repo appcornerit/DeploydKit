@@ -11,8 +11,6 @@
 //
 
 #import "DKNetworkActivity.h"
-
-#import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
 
 

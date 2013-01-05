@@ -10,7 +10,6 @@
 //  Copyright (c) 2012 chocomoko.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
 /**
  The manager is used to configure common DeploydKit parameters
@@ -91,5 +90,19 @@
  @return `YES` if the request log is enabled, `NO` otherwise
  */
 + (BOOL)requestLogEnabled;
+
+/**
+ Returns the reachability status
+ @return `YES` if the endpoint is reachable, `NO` otherwise
+ */
++ (BOOL)endpointReachable;
+
+
+/** @name Controlling Caching Behavior (only used for GET requests)*/
+
+/**
+ Clears the cached results for all requests.
+ */
++ (void)clearAllCachedResults;
 
 @end

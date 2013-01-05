@@ -11,10 +11,8 @@
 //
 
 #import "DKEntityTests.h"
-
 #import "DeploydKit.h"
 #import "DKEntity-Private.h"
-#import "NSData+DeploydKit.h"
 #import "DKTests.h"
 
 @implementation DKEntityTests

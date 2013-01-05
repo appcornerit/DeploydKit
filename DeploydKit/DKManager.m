@@ -12,6 +12,8 @@
 
 #import "DKManager.h"
 #import "DKRequest.h"
+#import "DKReachability.h"
+#import "EGOCache.h"
 
 @implementation DKManager
 
@@ -19,6 +21,8 @@ static NSString *kDKManagerAPIEndpoint;
 static BOOL kDKManagerRequestLogEnabled;
 static NSString *kDKManagerAPISecret;
 static NSString *kDKManagerSessionId;
+static BOOL kDKManagerReachable;
+static NSTimeInterval kDKManagerMaxCacheAge;
 
 + (void)setAPIEndpoint:(NSString *)absoluteString {
   NSURL *ep = [NSURL URLWithString:absoluteString];
@@ -32,6 +36,22 @@ static NSString *kDKManagerSessionId;
     
   }
   kDKManagerAPIEndpoint = [absoluteString copy];
+    
+  // allocate a reachability object
+  DKReachability* reach = [DKReachability reachabilityWithHostname:ep.host];
+  DKNetworkStatus internetStatus = [reach currentReachabilityStatus];
+  if(internetStatus == DKNotReachable)
+    kDKManagerReachable = NO;
+  else
+    kDKManagerReachable = YES;
+
+  // here we set up a NSNotification observer. The Reachability that caused the notification
+  // is passed in the object parameter
+  [[NSNotificationCenter defaultCenter] addObserver:[self class]
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+  [reach startNotifier];
 }
 
 + (void)setAPISecret:(NSString *)secret {
@@ -82,6 +102,35 @@ static NSString *kDKManagerSessionId;
 
 + (BOOL)requestLogEnabled {
   return kDKManagerRequestLogEnabled;
+}
+
++ (BOOL)endpointReachable {
+    return kDKManagerReachable;
+}
+
++ (void)setMaxCacheAge:(NSTimeInterval)maxCacheAge{
+  kDKManagerMaxCacheAge = maxCacheAge;
+}
+
++ (NSTimeInterval)maxCacheAge{
+    return kDKManagerMaxCacheAge;
+}
+
++ (void)clearAllCachedResults{
+  [[EGOCache globalCache] clearCache];
+}
+
+//Called by DKReachability whenever status changes.
++ (void)reachabilityChanged: (NSNotification* )note
+{    
+    DKReachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [DKReachability class]]);
+    DKNetworkStatus internetStatus = [curReach currentReachabilityStatus];
+    if(internetStatus == DKNotReachable) {
+        kDKManagerReachable = NO;
+        return;
+    }
+    kDKManagerReachable = YES;
 }
 
 @end

@@ -49,22 +49,24 @@
 		FFB5E510165ACFE800B0651C /* DKQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4E9165ACFE800B0651C /* DKQuery.m */; };
 		FFB5E512165ACFE800B0651C /* DKQueryTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4EA165ACFE800B0651C /* DKQueryTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E513165ACFE800B0651C /* DKQueryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4EB165ACFE800B0651C /* DKQueryTableViewController.m */; };
-		FFB5E518165ACFE800B0651C /* DKEntity-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4EF165ACFE800B0651C /* DKEntity-Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFB5E518165ACFE800B0651C /* DKEntity-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4EF165ACFE800B0651C /* DKEntity-Private.h */; settings = {ATTRIBUTES = (); }; };
 		FFB5E519165ACFE800B0651C /* DKQuery-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F0165ACFE800B0651C /* DKQuery-Private.h */; };
 		FFB5E51A165ACFE800B0651C /* DKRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F1165ACFE800B0651C /* DKRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFB5E51B165ACFE800B0651C /* DKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F2165ACFE800B0651C /* DKRequest.m */; };
-		FFB5E51D165ACFE800B0651C /* NSData+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFB5E51E165ACFE800B0651C /* NSData+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */; };
-		FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFB5E526165ACFE800B0651C /* NSString+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFB5E527165ACFE800B0651C /* NSString+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4FA165ACFE800B0651C /* NSString+DeploydKit.m */; };
-		FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4FB165ACFE800B0651C /* NSURLConnection+Timeout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */; settings = {ATTRIBUTES = (); }; };
+		FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */ = {isa = PBXBuildFile; fileRef = FFB5E4FB165ACFE800B0651C /* NSURLConnection+Timeout.h */; settings = {ATTRIBUTES = (); }; };
 		FFB5E52A165ACFE800B0651C /* NSURLConnection+Timeout.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E4FC165ACFE800B0651C /* NSURLConnection+Timeout.m */; };
 		FFB5E552165ACFF600B0651C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FFB5E53C165ACFF600B0651C /* InfoPlist.strings */; };
 		FFB5E554165AD80500B0651C /* NSError+DeploydKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E553165AD80500B0651C /* NSError+DeploydKit.m */; };
 		FFB5E558165AF1E500B0651C /* DKEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E532165ACFF600B0651C /* DKEntityTests.m */; };
 		FFB5E559165AF1E500B0651C /* DKFileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E534165ACFF600B0651C /* DKFileTests.m */; };
 		FFB5E55A165AF1E500B0651C /* DKQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB5E538165ACFF600B0651C /* DKQueryTests.m */; };
+		FFCEE80A1691E37C00FA81A6 /* EGOCache.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCEE8081691E37C00FA81A6 /* EGOCache.h */; settings = {ATTRIBUTES = (); }; };
+		FFCEE80B1691E37C00FA81A6 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCEE8091691E37C00FA81A6 /* EGOCache.m */; };
+		FFCEE80C1691E37C00FA81A6 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCEE8091691E37C00FA81A6 /* EGOCache.m */; };
+		FFD14B4716988C1400CF115A /* DKReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = FFD14B4516988C1000CF115A /* DKReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFD14B4816988C1400CF115A /* DKReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD14B4616988C1100CF115A /* DKReachability.m */; };
+		FFD14B4916988C1400CF115A /* DKReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD14B4616988C1100CF115A /* DKReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,11 +116,7 @@
 		FFB5E4F0165ACFE800B0651C /* DKQuery-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DKQuery-Private.h"; sourceTree = "<group>"; };
 		FFB5E4F1165ACFE800B0651C /* DKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKRequest.h; sourceTree = "<group>"; };
 		FFB5E4F2165ACFE800B0651C /* DKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRequest.m; sourceTree = "<group>"; };
-		FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DeploydKit.h"; sourceTree = "<group>"; };
-		FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DeploydKit.m"; sourceTree = "<group>"; };
 		FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+DeploydKit.h"; sourceTree = "<group>"; };
-		FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DeploydKit.h"; sourceTree = "<group>"; };
-		FFB5E4FA165ACFE800B0651C /* NSString+DeploydKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DeploydKit.m"; sourceTree = "<group>"; };
 		FFB5E4FB165ACFE800B0651C /* NSURLConnection+Timeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Timeout.h"; sourceTree = "<group>"; };
 		FFB5E4FC165ACFE800B0651C /* NSURLConnection+Timeout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Timeout.m"; sourceTree = "<group>"; };
 		FFB5E52E165ACFF600B0651C /* DeploydKitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DeploydKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -131,6 +129,10 @@
 		FFB5E53B165ACFF600B0651C /* DKTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKTests.h; sourceTree = "<group>"; };
 		FFB5E53D165ACFF600B0651C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FFB5E553165AD80500B0651C /* NSError+DeploydKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+DeploydKit.m"; sourceTree = "<group>"; };
+		FFCEE8081691E37C00FA81A6 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		FFCEE8091691E37C00FA81A6 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		FFD14B4516988C1000CF115A /* DKReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKReachability.h; sourceTree = "<group>"; };
+		FFD14B4616988C1100CF115A /* DKReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKReachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,8 @@
 				FFB5E4DB165ACFE800B0651C /* DeploydKit-Prefix.pch */,
 				FFB5E4DC165ACFE800B0651C /* DeploydKit.h */,
 				FFB5E4DD165ACFE800B0651C /* DKConstants.h */,
+				FFD14B4516988C1000CF115A /* DKReachability.h */,
+				FFD14B4616988C1100CF115A /* DKReachability.m */,
 				FFB5E4DE165ACFE800B0651C /* DKEntity.h */,
 				FFB5E4DF165ACFE800B0651C /* DKEntity.m */,
 				FFB5E4E0165ACFE800B0651C /* DKFile.h */,
@@ -217,18 +221,16 @@
 		FFB5E4EE165ACFE800B0651C /* DeploydKit-Private */ = {
 			isa = PBXGroup;
 			children = (
+				FFCEE8081691E37C00FA81A6 /* EGOCache.h */,
+				FFCEE8091691E37C00FA81A6 /* EGOCache.m */,
 				FF12E461166FF61A00BF63CE /* SecureUDID.h */,
 				FF12E462166FF61A00BF63CE /* SecureUDID.m */,
 				FFB5E4EF165ACFE800B0651C /* DKEntity-Private.h */,
 				FFB5E4F0165ACFE800B0651C /* DKQuery-Private.h */,
 				FFB5E4F1165ACFE800B0651C /* DKRequest.h */,
 				FFB5E4F2165ACFE800B0651C /* DKRequest.m */,
-				FFB5E4F3165ACFE800B0651C /* NSData+DeploydKit.h */,
-				FFB5E4F4165ACFE800B0651C /* NSData+DeploydKit.m */,
 				FFB5E4F7165ACFE800B0651C /* NSError+DeploydKit.h */,
 				FFB5E553165AD80500B0651C /* NSError+DeploydKit.m */,
-				FFB5E4F9165ACFE800B0651C /* NSString+DeploydKit.h */,
-				FFB5E4FA165ACFE800B0651C /* NSString+DeploydKit.m */,
 				FFB5E4FB165ACFE800B0651C /* NSURLConnection+Timeout.h */,
 				FFB5E4FC165ACFE800B0651C /* NSURLConnection+Timeout.m */,
 			);
@@ -267,15 +269,15 @@
 				FFB5E50C165ACFE800B0651C /* DKNetworkActivity.h in Headers */,
 				FFB5E50F165ACFE800B0651C /* DKQuery.h in Headers */,
 				FFB5E512165ACFE800B0651C /* DKQueryTableViewController.h in Headers */,
-				FFB5E518165ACFE800B0651C /* DKEntity-Private.h in Headers */,
 				FFB5E51A165ACFE800B0651C /* DKRequest.h in Headers */,
+				FFD14B4716988C1400CF115A /* DKReachability.h in Headers */,
 				FF12E458166E9D5700BF63CE /* DKChannel.h in Headers */,
-				FFB5E51D165ACFE800B0651C /* NSData+DeploydKit.h in Headers */,
-				FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */,
-				FFB5E526165ACFE800B0651C /* NSString+DeploydKit.h in Headers */,
-				FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */,
 				FFB5E519165ACFE800B0651C /* DKQuery-Private.h in Headers */,
+				FFB5E523165ACFE800B0651C /* NSError+DeploydKit.h in Headers */,
+				FFB5E529165ACFE800B0651C /* NSURLConnection+Timeout.h in Headers */,
+				FFB5E518165ACFE800B0651C /* DKEntity-Private.h in Headers */,
 				FF12E463166FF61A00BF63CE /* SecureUDID.h in Headers */,
+				FFCEE80A1691E37C00FA81A6 /* EGOCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,12 +415,12 @@
 				FFB5E510165ACFE800B0651C /* DKQuery.m in Sources */,
 				FFB5E513165ACFE800B0651C /* DKQueryTableViewController.m in Sources */,
 				FFB5E51B165ACFE800B0651C /* DKRequest.m in Sources */,
-				FFB5E51E165ACFE800B0651C /* NSData+DeploydKit.m in Sources */,
-				FFB5E527165ACFE800B0651C /* NSString+DeploydKit.m in Sources */,
 				FFB5E52A165ACFE800B0651C /* NSURLConnection+Timeout.m in Sources */,
 				FFB5E554165AD80500B0651C /* NSError+DeploydKit.m in Sources */,
 				FF12E459166E9D5700BF63CE /* DKChannel.m in Sources */,
 				FF12E464166FF61A00BF63CE /* SecureUDID.m in Sources */,
+				FFCEE80B1691E37C00FA81A6 /* EGOCache.m in Sources */,
+				FFD14B4816988C1400CF115A /* DKReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +431,8 @@
 				FFB5E558165AF1E500B0651C /* DKEntityTests.m in Sources */,
 				FFB5E559165AF1E500B0651C /* DKFileTests.m in Sources */,
 				FFB5E55A165AF1E500B0651C /* DKQueryTests.m in Sources */,
+				FFCEE80C1691E37C00FA81A6 /* EGOCache.m in Sources */,
+				FFD14B4916988C1400CF115A /* DKReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
