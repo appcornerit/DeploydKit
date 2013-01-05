@@ -15,22 +15,22 @@ Refer to [Deployd.com](http://docs.deployd.com) documentation.
 
 Link to DeploydKit and import `<DeploydKit/DeploydKit.h>`. Now you only need to configure the DeploydKit manager and you are almost there (this needs to be done before any other DeploydKit objects are invoked, so the app delegate would be a good place to put it).
 
-The following linker flags must be set:
-
--ObjC
--all_load
-
 ```objc
 [DKManager setAPIEndpoint:@"http://localhost:2403/"];
 // key difficult to guess, used in DKChannel for configure secureudid (http://secureudid.org)  
 [DKManager setAPISecret:@"4333f0a9d92257804a8c396677f9f8e4c8313e6e1c85bd244192c743ce898285"];
 ```
 
+The following linker flags must be set:
+
+-ObjC
+-all_load
+
 ### Start Coding
 
 Here are some examples on how to use DeploydKit, this is in no way the complete feature set.
 
-Classes:
+#### Classes:
 
 - DKManager
 - DKEntity
