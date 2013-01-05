@@ -15,7 +15,7 @@ Refer to [Deployd.com](http://docs.deployd.com) documentation.
 
 Link to DeploydKit and import `<DeploydKit/DeploydKit.h>`. Now you only need to configure the DeploydKit manager and you are almost there (this needs to be done before any other DeploydKit objects are invoked, so the app delegate would be a good place to put it).
 
-And the following linker flags must be set:
+The following linker flags must be set:
 
 -ObjC
 -all_load
