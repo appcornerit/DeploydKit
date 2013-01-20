@@ -67,7 +67,7 @@
   DKRequest *request = [DKRequest request];
   request.cachePolicy = DKCachePolicyIgnoreCache;
 
-  NSDictionary *requestDict = [NSDictionary dictionaryWithObject:fileName forKey:kDKRequestAssignedFileName];
+  NSDictionary *requestDict = @{kDKRequestAssignedFileName: fileName};
   NSMutableString * queryParams = [NSMutableString stringWithString:kDKRequestFileCollection];
     
   NSError *requestError = nil;
@@ -82,7 +82,7 @@
   if ([results isKindOfClass:[NSArray class]]) {
     for (NSDictionary *objDict in results) {
         if ([objDict isKindOfClass:[NSDictionary class]]) {
-                NSString *resultFileName = [objDict objectForKey:kDKRequestAssignedFileName];
+                NSString *resultFileName = objDict[kDKRequestAssignedFileName];
                 return [fileName isEqualToString: resultFileName];
         }
     }
@@ -110,7 +110,7 @@
     DKRequest *request = [DKRequest request];
     request.cachePolicy = DKCachePolicyIgnoreCache;
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys: nil];
+    NSDictionary *dict = @{};
 
     NSError *requestError = nil;
     [request sendRequestWithObject:dict method:@"delete" entity:[kDKRequestFileCollection stringByAppendingPathComponent:fileName] error:&requestError];
@@ -208,7 +208,7 @@
                  original:JSONError];
   }
   if([resultObj isKindOfClass:[NSDictionary class]]){
-    self.name = [resultObj objectForKey:kDKRequestAssignedFileName];
+    self.name = resultObj[kDKRequestAssignedFileName];
     if(!self.name) return NO;
     self.isVolatile = NO;
     if(resultBlock) resultBlock(YES,nil);

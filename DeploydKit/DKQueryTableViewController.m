@@ -221,7 +221,7 @@
     return [self tableViewNextPageCell:tableView];
   }
   
-  id object = [self.objects objectAtIndex:indexPath.row];
+  id object = (self.objects)[indexPath.row];
   
   static NSString *identifier = @"DKEntityTableCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -232,11 +232,11 @@
   
   if (self.displayedTitleKey.length > 0) {
     // DKEntity and NSDictionary both implement objectForKey
-    cell.textLabel.text = [object objectForKey:self.displayedTitleKey];
+    cell.textLabel.text = object[self.displayedTitleKey];
   }
   if (self.displayedImageKey.length > 0) {
     // DKEntity and NSDictionary both implement objectForKey
-    cell.imageView.image = [UIImage imageWithData:[object objectForKey:self.displayedImageKey]];
+    cell.imageView.image = [UIImage imageWithData:object[self.displayedImageKey]];
   }
   
   return cell;
@@ -261,7 +261,7 @@
     [self loadNextPageWithNextPageCell:cell];
   }
   else {
-    [self tableView:tableView didSelectRowAtIndexPath:indexPath object:[self.objects objectAtIndex:indexPath.row]];
+    [self tableView:tableView didSelectRowAtIndexPath:indexPath object:(self.objects)[indexPath.row]];
   }
 }
 

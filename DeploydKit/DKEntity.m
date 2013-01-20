@@ -41,7 +41,7 @@
 }
 
 - (NSString *)entityId {
-  NSString *eid = [self.resultMap objectForKey:kDKEntityIDField];
+  NSString *eid = (self.resultMap)[kDKEntityIDField];
   if ([eid isKindOfClass:[NSString class]]) {
     return eid;
   }
@@ -49,7 +49,7 @@
 }
 
 - (NSDate *)updatedAt {
-  NSNumber *updatedAt = [self.resultMap objectForKey:kDKEntityUpdatedAtField];
+  NSNumber *updatedAt = (self.resultMap)[kDKEntityUpdatedAtField];
   if ([updatedAt isKindOfClass:[NSNumber class]]) {
     return [NSDate dateWithTimeIntervalSince1970:[updatedAt doubleValue]];
   }
@@ -57,7 +57,7 @@
 }
 
 - (NSDate *)createdAt {
-  NSNumber *updatedAt = [self.resultMap objectForKey:kDKEntityCreatedAtField];
+  NSNumber *updatedAt = (self.resultMap)[kDKEntityCreatedAtField];
   if ([updatedAt isKindOfClass:[NSNumber class]]) {
     return [NSDate dateWithTimeIntervalSince1970:[updatedAt doubleValue]];
   }
@@ -65,7 +65,7 @@
 }
 
 - (NSString*)creatorId {
-  NSString *creatorid = [self.resultMap objectForKey:kDKEntityCreatorIdField];
+  NSString *creatorid = (self.resultMap)[kDKEntityCreatorIdField];
   if ([creatorid isKindOfClass:[NSString class]]) {
       return creatorid;
   }
@@ -132,7 +132,7 @@
   }
   
   // Create request dict
-  NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+  NSDictionary *requestDict = @{};
   
   // Send request synchronously
   DKRequest *request = [DKRequest request];
@@ -180,7 +180,7 @@
   }
   
   // Create request dict
-  NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys: nil];
+  NSDictionary *requestDict = @{};
   
   // Send request synchronously
   DKRequest *request = [DKRequest request];
@@ -222,42 +222,42 @@
 }
 
 - (id)objectForKey:(NSString *)key {
-  id obj = [self.setMap objectForKey:key];
+  id obj = (self.setMap)[key];
   if (obj == nil) {
-    obj = [self.resultMap objectForKey:key];
+    obj = (self.resultMap)[key];
   }
   return obj;
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key {
-  [self.setMap setObject:object forKey:key];
+  (self.setMap)[key] = object;
 }
 
 - (void)pushObject:(id)object forKey:(NSString *)key {
-  [self.pushMap setObject:object forKey:key];
+  (self.pushMap)[key] = object;
 }
 
 - (void)pushAllObjects:(NSArray *)objects forKey:(NSString *)key {
-  [self.pushAllMap setObject:objects forKey:key];
+  (self.pushAllMap)[key] = objects;
 }
 
 - (void)pullObject:(id)object forKey:(NSString *)key {
-  [self pullAllObjects:[NSArray arrayWithObject:object] forKey:key];
+  [self pullAllObjects:@[object] forKey:key];
 }
 
 - (void)pullAllObjects:(NSArray *)objects forKey:(NSString *)key {
-  [self.pullAllMap setObject:objects forKey:key];
+  (self.pullAllMap)[key] = objects;
 }
 
 - (void)addObjectToSet:(id)object forKey:(NSString *)key {
-  [self addAllObjectsToSet:[NSArray arrayWithObject:object] forKey:key];
+  [self addAllObjectsToSet:@[object] forKey:key];
 }
 
 - (void)addAllObjectsToSet:(NSArray *)objects forKey:(NSString *)key {
-  NSMutableArray *list = [self.addToSetMap objectForKey:key];
+  NSMutableArray *list = (self.addToSetMap)[key];
   if (list == nil) {
     list = [NSMutableArray new];
-    [self.addToSetMap setObject:list forKey:key];
+    (self.addToSetMap)[key] = list;
   }
   for (id obj in objects) {
     if (![list containsObject:objects]) {
@@ -267,11 +267,11 @@
 }
 
 - (void)incrementKey:(NSString *)key {
-  [self incrementKey:key byAmount:[NSNumber numberWithInteger:1]];
+  [self incrementKey:key byAmount:@1];
 }
 
 - (void)incrementKey:(NSString *)key byAmount:(NSNumber *)amount {
-  [self.incMap setObject:amount forKey:key];
+  (self.incMap)[key] = amount;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -286,8 +286,8 @@
 }
 
 - (BOOL)login:(NSError **)error username:(NSString*)username password:(NSString*)password{
-    [self.loginMap setObject:username forKey:kDKEntityUserName];
-    [self.loginMap setObject:password forKey:kDKEntityUserPassword];
+    (self.loginMap)[kDKEntityUserName] = username;
+    (self.loginMap)[kDKEntityUserPassword] = password;
     return [self sendAction:@"login" error:error];
 }
 
@@ -298,7 +298,7 @@
 - (BOOL)loggedUser:(NSError **)error {
          
      // Create request dict
-     NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys: nil];
+     NSDictionary *requestDict = @{};
      
      // Send request synchronously
      DKRequest *request = [DKRequest request];
@@ -331,7 +331,7 @@
         // Allowed use of $each
         static NSArray* allowedKeys;
         if (allowedKeys == nil) {
-            allowedKeys = [NSArray arrayWithObjects:@"$each",nil];
+            allowedKeys = @[@"$each"];
         }
     
         __block id (^validateKeys)(id obj);
@@ -343,7 +343,7 @@
                         [NSException raise:NSInvalidArgumentException
                                     format:@"Invalid object key '%@'. Keys may not contain '$' or '.'", key];
                     }
-                    id obj2 = [obj objectForKey:key];
+                    id obj2 = obj[key];
                     validateKeys(obj2);
                 }
             }
@@ -359,14 +359,14 @@
         NSMutableDictionary *requestDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
         if([action isEqualToString:@"login"]){
             for (id key in self.loginMap) {
-                id value = [self.loginMap objectForKey:key];
-                [requestDict setObject:validateKeys(value) forKey:key];
+                id value = (self.loginMap)[key];
+                requestDict[key] = validateKeys(value);
             }
         }else{
             if (self.setMap.count > 0) {
                 for (id key in self.setMap) {
-                    id value = [self.setMap objectForKey:key];
-                    [requestDict setObject:validateKeys(value) forKey:key];
+                    id value = (self.setMap)[key];
+                    requestDict[key] = validateKeys(value);
                 }
             }
             if (self.incMap.count > 0) {
@@ -384,10 +384,10 @@
             if (self.addToSetMap.count > 0) {
                 NSMutableDictionary *addToSetDict = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];                
                 for (id key in self.addToSetMap) {
-                    id value = [self.addToSetMap objectForKey:key];
+                    id value = (self.addToSetMap)[key];
                     [DKEntity deploydCommands:[NSMutableDictionary dictionaryWithObjectsAndKeys: value, key, nil] operation:@"$each" requestDict:addToSetDict];
                 }                
-                [requestDict setObject:validateKeys(addToSetDict) forKey:@"$addToSet"];
+                requestDict[@"$addToSet"] = validateKeys(addToSetDict);
             }
         }
     
@@ -474,15 +474,15 @@
   }
   else if([method isEqualToString:@"login"]){
           NSMutableDictionary *m = [resultMap mutableCopy];
-          NSString* sid =[m objectForKey:@"id"]; //sid already saved as cookie
-          NSString* uid =[m objectForKey:@"uid"];
-          NSString* path =[m objectForKey:@"path"];
+          NSString* sid =m[@"id"]; //sid already saved as cookie
+          NSString* uid =m[@"uid"];
+          NSString* path =m[@"path"];
           if(sid != nil){
               //[DKManager setSessionId:sid];
               [m removeObjectForKey:@"id"];
           }
           if(uid != nil){
-              [m setObject:uid forKey:@"id"];
+              m[@"id"] = uid;
               [m removeObjectForKey:@"uid"];
           }
           if(path != nil){
@@ -500,9 +500,9 @@
 +(void)deploydCommands:(NSMutableDictionary*)map operation:(NSString*)op requestDict:(NSMutableDictionary*)dict {
     for (id key in map) {
         NSMutableDictionary* result = [NSMutableDictionary new];
-        id value = [map objectForKey:key];
-        [result setObject:value forKey:op];
-        [dict setObject:result forKey:key];
+        id value = map[key];
+        result[op] = value;
+        dict[key] = result;
     }
 }
 

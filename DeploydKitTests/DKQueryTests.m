@@ -144,14 +144,14 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithDouble:1.5] forKey:kDKEntityTestsPostPrice];
-  [postObject1 setObject:[NSNumber numberWithDouble:9.3] forKey:kDKEntityTestsPostQuantity];    
+  [postObject1 setObject:@1.5 forKey:kDKEntityTestsPostPrice];
+  [postObject1 setObject:@9.3 forKey:kDKEntityTestsPostQuantity];    
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithDouble:4.3] forKey:kDKEntityTestsPostPrice];
-  [postObject2 setObject:[NSNumber numberWithDouble:7.0] forKey:kDKEntityTestsPostQuantity];    
+  [postObject2 setObject:@4.3 forKey:kDKEntityTestsPostPrice];
+  [postObject2 setObject:@7.0 forKey:kDKEntityTestsPostQuantity];    
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -159,41 +159,41 @@
   //Query gt/lt
   error = nil;    
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q whereKey:kDKEntityTestsPostPrice greaterThan:[NSNumber numberWithDouble:1.0]];
-  [q whereKey:kDKEntityTestsPostPrice lessThan:[NSNumber numberWithDouble:4.3]];
+  [q whereKey:kDKEntityTestsPostPrice greaterThan:@1.0];
+  [q whereKey:kDKEntityTestsPostPrice lessThan:@4.3];
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:1.5], nil);
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:9.3], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], @1.5, nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @9.3, nil);
   
   //Query gt/lte
   error = nil;
   DKQuery *q2 = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q2 whereKey:kDKEntityTestsPostPrice greaterThan:[NSNumber numberWithDouble:1.0]];
-  [q2 whereKey:kDKEntityTestsPostPrice lessThanOrEqualTo:[NSNumber numberWithDouble:4.3]];
+  [q2 whereKey:kDKEntityTestsPostPrice greaterThan:@1.0];
+  [q2 whereKey:kDKEntityTestsPostPrice lessThanOrEqualTo:@4.3];
   results = [q2 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)2, nil);
-  DKEntity *r1 = [results objectAtIndex:0];
-  DKEntity *r2 = [results objectAtIndex:1];
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:1.5], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:9.3], nil);
-  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:4.3], nil);
-  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:7.0], nil);
+  DKEntity *r1 = results[0];
+  DKEntity *r2 = results[1];
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostPrice], @1.5, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostQuantity], @9.3, nil);
+  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostPrice], @4.3, nil);
+  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostQuantity], @7.0, nil);
   
   //Compound
   error = nil;
   DKQuery *q3 = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q3 whereKey:kDKEntityTestsPostPrice greaterThan:[NSNumber numberWithDouble:1.0]];
-  [q3 whereKey:kDKEntityTestsPostQuantity lessThanOrEqualTo:[NSNumber numberWithDouble:7.0]];
+  [q3 whereKey:kDKEntityTestsPostPrice greaterThan:@1.0];
+  [q3 whereKey:kDKEntityTestsPostQuantity lessThanOrEqualTo:@7.0];
   results = [q3 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *r3 = [results lastObject];
-  STAssertEqualObjects([r3 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:4.3], nil);
-  STAssertEqualObjects([r3 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:7.0], nil);
+  STAssertEqualObjects([r3 objectForKey:kDKEntityTestsPostPrice], @4.3, nil);
+  STAssertEqualObjects([r3 objectForKey:kDKEntityTestsPostQuantity], @7.0, nil);
   
   //Delete posts
   error = nil;
@@ -216,23 +216,23 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostVisits];
-  [postObject1 setObject:[NSNumber numberWithDouble:2.0] forKey:kDKEntityTestsPostPrice];
-  [postObject1 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject1 setObject:@1.0 forKey:kDKEntityTestsPostVisits];
+  [postObject1 setObject:@2.0 forKey:kDKEntityTestsPostPrice];
+  [postObject1 setObject:@1.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithDouble:2.0] forKey:kDKEntityTestsPostVisits];
-  [postObject2 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostPrice];
-  [postObject2 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject2 setObject:@2.0 forKey:kDKEntityTestsPostVisits];
+  [postObject2 setObject:@1.0 forKey:kDKEntityTestsPostPrice];
+  [postObject2 setObject:@1.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject3 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject3 setObject:[NSNumber numberWithDouble:2.0] forKey:kDKEntityTestsPostVisits];
-  [postObject3 setObject:[NSNumber numberWithDouble:2.0] forKey:kDKEntityTestsPostPrice];
-  [postObject3 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject3 setObject:@2.0 forKey:kDKEntityTestsPostVisits];
+  [postObject3 setObject:@2.0 forKey:kDKEntityTestsPostPrice];
+  [postObject3 setObject:@1.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject3 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -240,19 +240,19 @@
   //Or
   error = nil;
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [[q or] whereKey:kDKEntityTestsPostVisits equalTo:[NSNumber numberWithDouble:1.0]];
-  [[q or] whereKey:kDKEntityTestsPostPrice lessThanOrEqualTo:[NSNumber numberWithDouble:1.0]];
+  [[q or] whereKey:kDKEntityTestsPostVisits equalTo:@1.0];
+  [[q or] whereKey:kDKEntityTestsPostPrice lessThanOrEqualTo:@1.0];
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)2, nil);
-  DKEntity *r0 = [results objectAtIndex:0];
-  DKEntity *r1 = [results objectAtIndex:1];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithDouble:1.0], nil);
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:2.0], nil);
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:1.0], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithDouble:2.0], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:1.0], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:1.0], nil);
+  DKEntity *r0 = results[0];
+  DKEntity *r1 = results[1];
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], @1.0, nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], @2.0, nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @1.0, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], @2.0, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostPrice], @1.0, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostQuantity], @1.0, nil);
   
   //Delete posts
   error = nil;
@@ -279,14 +279,14 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostPrice];
-  [postObject1 setObject:[NSNumber numberWithDouble:3.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject1 setObject:@1.0 forKey:kDKEntityTestsPostPrice];
+  [postObject1 setObject:@3.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostPrice];
-  [postObject2 setObject:[NSNumber numberWithDouble:2.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject2 setObject:@1.0 forKey:kDKEntityTestsPostPrice];
+  [postObject2 setObject:@2.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -344,24 +344,24 @@
   //Test contained-in
   error = nil;
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q whereKey:kDKEntityTestsPostText containedIn:[NSArray arrayWithObjects:@"post1", @"post2", nil]];
+  [q whereKey:kDKEntityTestsPostText containedIn:@[@"post1", @"post2"]];
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)2, nil);
-  DKEntity *r0 = [results objectAtIndex:0];
-  DKEntity *r1 = [results objectAtIndex:1];
+  DKEntity *r0 = results[0];
+  DKEntity *r1 = results[1];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostText], @"post1", nil);
   STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostText], @"post2", nil);
   
   //Test not-contained-in
   error = nil;    
   DKQuery *q2 = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q2 whereKey:kDKEntityTestsPostText notContainedIn:[NSArray arrayWithObjects:@"post1", @"post2", nil]];
+  [q2 whereKey:kDKEntityTestsPostText notContainedIn:@[@"post1", @"post2"]];
   error = nil;
   results = [q2 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  r0 = [results objectAtIndex:0];
+  r0 = results[0];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostText], @"post3", nil);
   
   //Delete posts
@@ -389,12 +389,12 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSArray arrayWithObjects:@"user1", @"user2", @"user3", nil] forKey:kDKEntityTestsPostSharedTo];
+  [postObject1 setObject:@[@"user1", @"user2", @"user3"] forKey:kDKEntityTestsPostSharedTo];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSArray arrayWithObjects:@"user1", @"user2", nil] forKey:kDKEntityTestsPostSharedTo];
+  [postObject2 setObject:@[@"user1", @"user2"] forKey:kDKEntityTestsPostSharedTo];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -402,27 +402,27 @@
   //Test all-in
   error = nil;
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q whereKey:kDKEntityTestsPostSharedTo containsAllIn:[NSArray arrayWithObjects:@"user1", @"user2", nil]];
+  [q whereKey:kDKEntityTestsPostSharedTo containsAllIn:@[@"user1", @"user2"]];
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)2, nil);
-  DKEntity *r0 = [results objectAtIndex:0];
-  DKEntity *r1 = [results objectAtIndex:1];
-  NSArray *m0 = [NSArray arrayWithObjects:@"user1", @"user2", @"user3", nil];
-  NSArray *m1 = [NSArray arrayWithObjects:@"user1", @"user2", nil];
+  DKEntity *r0 = results[0];
+  DKEntity *r1 = results[1];
+  NSArray *m0 = @[@"user1", @"user2", @"user3"];
+  NSArray *m1 = @[@"user1", @"user2"];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostSharedTo], m0, nil);
   STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostSharedTo], m1, nil);
   
   //Test all-in (2)
   error = nil;
   DKQuery *q2 = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q2 whereKey:kDKEntityTestsPostSharedTo containsAllIn:[NSArray arrayWithObjects:@"user1", @"user2", @"user3", nil]];
+  [q2 whereKey:kDKEntityTestsPostSharedTo containsAllIn:@[@"user1", @"user2", @"user3"]];
   error = nil;
   results = [q2 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  r0 = [results objectAtIndex:0];
-  m0 = [NSArray arrayWithObjects:@"user1", @"user2", @"user3", nil];
+  r0 = results[0];
+  m0 = @[@"user1", @"user2", @"user3"];
   STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostSharedTo], m0, nil);
   
   //Delete posts
@@ -446,12 +446,12 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithDouble:1.0] forKey:kDKEntityTestsPostQuantity];
+  [postObject1 setObject:@1.0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithDouble:50.0] forKey:kDKEntityTestsPostPrice];
+  [postObject2 setObject:@50.0 forKey:kDKEntityTestsPostPrice];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -464,7 +464,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithDouble:1.0], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @1.0, nil);
     
   //Test not exists
   error = nil;
@@ -474,7 +474,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithDouble:50.0], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostPrice], @50.0, nil);
     
   //Delete posts
   error = nil;
@@ -497,17 +497,17 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithInteger:0] forKey:kDKEntityTestsPostVisits];
+  [postObject1 setObject:@0 forKey:kDKEntityTestsPostVisits];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithInteger:1] forKey:kDKEntityTestsPostVisits];
+  [postObject2 setObject:@1 forKey:kDKEntityTestsPostVisits];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject3 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject3 setObject:[NSNumber numberWithInteger:2] forKey:kDKEntityTestsPostVisits];
+  [postObject3 setObject:@2 forKey:kDKEntityTestsPostVisits];
   success = [postObject3 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -519,12 +519,12 @@
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)3, nil);
-  DKEntity *r0 = [results objectAtIndex:0];
-  DKEntity *r1 = [results objectAtIndex:1];
-  DKEntity *r2 = [results objectAtIndex:2];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:0], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:1], nil);
-  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:2], nil);
+  DKEntity *r0 = results[0];
+  DKEntity *r1 = results[1];
+  DKEntity *r2 = results[2];
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], @0, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], @1, nil);
+  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostVisits], @2, nil);
   
   //Test desc
   error = nil;
@@ -533,12 +533,12 @@
   results = [q2 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)3, nil);
-  r0 = [results objectAtIndex:0];
-  r1 = [results objectAtIndex:1];
-  r2 = [results objectAtIndex:2];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:2], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:1], nil);
-  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:0], nil);
+  r0 = results[0];
+  r1 = results[1];
+  r2 = results[2];
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], @2, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], @1, nil);
+  STAssertEqualObjects([r2 objectForKey:kDKEntityTestsPostVisits], @0, nil);
   
   //Test limit
   error = nil;
@@ -548,10 +548,10 @@
   results = [q3 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)2, nil);
-  r0 = [results objectAtIndex:0];
-  r1 = [results objectAtIndex:1];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:2], nil);
-  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:1], nil);
+  r0 = results[0];
+  r1 = results[1];
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], @2, nil);
+  STAssertEqualObjects([r1 objectForKey:kDKEntityTestsPostVisits], @1, nil);
   
   //Test skip
   error = nil;
@@ -562,8 +562,8 @@
   results = [q4 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  r0 = [results objectAtIndex:0];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], [NSNumber numberWithInteger:0], nil);
+  r0 = results[0];
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostVisits], @0, nil);
   
   //Delete posts
   error = nil;
@@ -599,13 +599,13 @@
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
   [postObject1 setObject:@"some words\nwith a newline\ninbetween" forKey:kDKEntityTestsPostText];
-  [postObject1 setObject:[NSNumber numberWithInteger:0] forKey:kDKEntityTestsPostQuantity];
+  [postObject1 setObject:@0 forKey:kDKEntityTestsPostQuantity];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
   [postObject2 setObject:@"another\nrandom regex\nstring" forKey:kDKEntityTestsPostText];
-  [postObject2 setObject:[NSNumber numberWithInteger:1] forKey:kDKEntityTestsPostQuantity];
+  [postObject2 setObject:@1 forKey:kDKEntityTestsPostQuantity];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -618,7 +618,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   DKEntity *r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:0], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @0, nil);
   
   //Test multiline regex
   error = nil;
@@ -628,7 +628,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:1], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @1, nil);
   
   //Test multiline regex fail
   error = nil;
@@ -646,7 +646,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:1], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @1, nil);
   
   //Test dotall regex fail
   error = nil;
@@ -664,7 +664,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:0], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @0, nil);
   
   //Test prefix
   error = nil;
@@ -674,7 +674,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:0], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @0, nil);
   
   //Test suffix
   error = nil;
@@ -684,7 +684,7 @@
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
   r0 = [results lastObject];
-  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:1], nil);
+  STAssertEqualObjects([r0 objectForKey:kDKEntityTestsPostQuantity], @1, nil);
   
   //Delete posts
   error = nil;
@@ -707,13 +707,13 @@
     
   //Insert posts
   DKEntity *postObject1 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject1 setObject:[NSNumber numberWithInteger:10] forKey:kDKEntityTestsPostQuantity];
-  [postObject1 setObject:[NSNumber numberWithInteger:50] forKey:kDKEntityTestsPostPrice];
+  [postObject1 setObject:@10 forKey:kDKEntityTestsPostQuantity];
+  [postObject1 setObject:@50 forKey:kDKEntityTestsPostPrice];
   success = [postObject1 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
   DKEntity *postObject2 = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject2 setObject:[NSNumber numberWithInteger:10] forKey:kDKEntityTestsPostQuantity];
+  [postObject2 setObject:@10 forKey:kDKEntityTestsPostQuantity];
   success = [postObject2 save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -721,7 +721,7 @@
   //Verify find all returns 2 objects
   error = nil;
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
-  [q whereKey:kDKEntityTestsPostQuantity equalTo:[NSNumber numberWithInteger:10]];
+  [q whereKey:kDKEntityTestsPostQuantity equalTo:@10];
   NSArray *results = [q findAll:&error];
   STAssertNil(error, error.localizedDescription);    
   STAssertEquals(results.count, (NSUInteger)2, nil);
@@ -743,7 +743,7 @@
   results = [q4 findAll:&error];
   STAssertNil(error, error.localizedDescription);
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  DKEntity *r0 = [results objectAtIndex:0];
+  DKEntity *r0 = results[0];
   STAssertEqualObjects(postObject2.entityId, r0.entityId, nil);
   
   //Delete posts
@@ -768,8 +768,8 @@
   //Insert posts
   DKEntity *postObject = [DKEntity entityWithName:kDKEntityTestsPost];
   [postObject setObject:@"post" forKey:kDKEntityTestsPostText];
-  [postObject setObject:[NSNumber numberWithInteger:10] forKey:kDKEntityTestsPostQuantity];
-  [postObject setObject:[NSNumber numberWithInteger:50] forKey:kDKEntityTestsPostPrice];
+  [postObject setObject:@10 forKey:kDKEntityTestsPostQuantity];
+  [postObject setObject:@50 forKey:kDKEntityTestsPostPrice];
   success = [postObject save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -778,26 +778,26 @@
   error = nil;    
   DKQuery *q = [DKQuery queryWithEntityName:kDKEntityTestsPost];
   [q whereEntityIdMatches:postObject.entityId];
-  [q excludeKeys:[NSArray arrayWithObjects:kDKEntityTestsPostText, kDKEntityTestsPostQuantity, nil]];
+  [q excludeKeys:@[kDKEntityTestsPostText, kDKEntityTestsPostQuantity]];
   NSArray * results = [q findAll:&error];
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  DKEntity *e2 = [results objectAtIndex:0];
+  DKEntity *e2 = results[0];
   STAssertNil(error, error.localizedDescription);
   STAssertNotNil(e2, nil);
   STAssertNil([e2 objectForKey:kDKEntityTestsPostText], nil);
   STAssertNil([e2 objectForKey:kDKEntityTestsPostQuantity], nil);
-  STAssertEqualObjects([e2 objectForKey:kDKEntityTestsPostPrice], [NSNumber numberWithInteger:50], nil);
+  STAssertEqualObjects([e2 objectForKey:kDKEntityTestsPostPrice], @50, nil);
   
   //Test include
   error = nil;
-  [q includeKeys:[NSArray arrayWithObjects:kDKEntityTestsPostText, kDKEntityTestsPostQuantity, nil]];
+  [q includeKeys:@[kDKEntityTestsPostText, kDKEntityTestsPostQuantity]];
   results = [q findAll:&error];
   STAssertEquals(results.count, (NSUInteger)1, nil);
-  DKEntity *e3 = [results objectAtIndex:0];
+  DKEntity *e3 = results[0];
   STAssertNil(error, error.localizedDescription);
   STAssertNotNil(e3, nil);
   STAssertEqualObjects([e3 objectForKey:kDKEntityTestsPostText], @"post", nil);
-  STAssertEqualObjects([e3 objectForKey:kDKEntityTestsPostQuantity], [NSNumber numberWithInteger:10], nil);
+  STAssertEqualObjects([e3 objectForKey:kDKEntityTestsPostQuantity], @10, nil);
   STAssertNil([e3 objectForKey:kDKEntityTestsPostPrice], nil);
   
   //Delete post

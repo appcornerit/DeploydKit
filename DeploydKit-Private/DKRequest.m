@@ -19,7 +19,6 @@
 @interface DKRequest ()
     @property (nonatomic, copy, readwrite) NSString *endpoint;
     @property (nonatomic, copy, readwrite) NSString* keyCache;
-    -(NSString*)httpMethod:(NSString*)op;
 @end
 
 // DEVNOTE: Allow untrusted certs in debug version.
@@ -238,8 +237,8 @@
                      original:JSONError];
       }
       else if (error != nil && [resultObj isKindOfClass:[NSDictionary class]]) {
-        NSNumber *status = [resultObj objectForKey:@"status"];
-        NSString *message = [resultObj objectForKey:@"message"];
+        NSNumber *status = resultObj[@"status"];
+        NSString *message = resultObj[@"message"];
         [NSError writeToError:error
                          code:status.integerValue
                   description:message
@@ -281,9 +280,8 @@
   if ([converted isKindOfClass:[NSDictionary class]]) {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     for (id key in converted) {
-      id obj = [converted objectForKey:key];
-      [dict setObject:[self iterateJSON:obj modify:handler]
-               forKey:key];
+      id obj = converted[key];
+      dict[key] = [self iterateJSON:obj modify:handler];
     }
     converted = [NSDictionary dictionaryWithDictionary:dict];
   }

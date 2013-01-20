@@ -129,7 +129,7 @@
   //Update post
   error = nil;    
   [postObject setObject:@"My first post udpated" forKey:kDKEntityTestsPostText];
-  NSArray * sharedArray = [NSArray arrayWithObjects: @"user_2",@"user_3",nil];
+  NSArray * sharedArray = @[@"user_2",@"user_3"];
   [postObject setObject:sharedArray forKey:kDKEntityTestsPostSharedTo];
   success = [postObject save:&error];
   STAssertNil(error, @"update should not return error, did return %@", error);
@@ -180,7 +180,7 @@
   //Insert post
   DKEntity *postObject = [DKEntity entityWithName:kDKEntityTestsPost];
   [postObject setObject:@"My first post" forKey:kDKEntityTestsPostText];
-  [postObject setObject:[NSNumber numberWithInteger:3] forKey:kDKEntityTestsPostVisits];
+  [postObject setObject:@3 forKey:kDKEntityTestsPostVisits];
   success = [postObject save:&error];
   STAssertNil(error, error.description);
   STAssertTrue(success, nil);
@@ -188,7 +188,7 @@
   
   //Increment
   error = nil; 
-  [postObject incrementKey:kDKEntityTestsPostVisits byAmount:[NSNumber numberWithInteger:2]];
+  [postObject incrementKey:kDKEntityTestsPostVisits byAmount:@2];
   success = [postObject save:&error];
   STAssertEquals([[postObject objectForKey:kDKEntityTestsPostVisits] integerValue], (NSInteger)5, nil);
     
@@ -209,7 +209,7 @@
     
   //Insert post
   DKEntity *postObject = [DKEntity entityWithName:kDKEntityTestsPost];
-  [postObject setObject:[NSArray arrayWithObject:@"user_2"] forKey:kDKEntityTestsPostSharedTo];  
+  [postObject setObject:@[@"user_2"] forKey:kDKEntityTestsPostSharedTo];  
   success = [postObject save:&error];
   STAssertTrue(success, nil);
   STAssertNil(error, error.description);
@@ -221,17 +221,17 @@
   STAssertTrue(success, nil);
   STAssertNil(error, error.description);
   NSArray *list = [postObject objectForKey:kDKEntityTestsPostSharedTo];
-  NSArray *comp = [NSArray arrayWithObjects:@"user_2", @"user_3", nil];
+  NSArray *comp = @[@"user_2", @"user_3"];
   STAssertEqualObjects(list, comp, nil);
 
   //Push all objects    
   error = nil;    
-  [postObject pushAllObjects:[NSArray arrayWithObjects:@"user_4", @"user_5", nil] forKey:kDKEntityTestsPostSharedTo];
+  [postObject pushAllObjects:@[@"user_4", @"user_5"] forKey:kDKEntityTestsPostSharedTo];
   success = [postObject save:&error];
   STAssertTrue(success, nil);
   STAssertNil(error, error.description);
   list = [postObject objectForKey:kDKEntityTestsPostSharedTo];
-  comp = [NSArray arrayWithObjects:@"user_2", @"user_3", @"user_4", @"user_5", nil];
+  comp = @[@"user_2", @"user_3", @"user_4", @"user_5"];
   STAssertEqualObjects(list, comp, nil);
   
   //Delete post
@@ -269,7 +269,7 @@
   
   //Pull all objects
   error = nil;
-  [postObject pullAllObjects:[NSArray arrayWithObjects:@"c", @"d", nil] forKey:kDKEntityTestsPostSharedTo];
+  [postObject pullAllObjects:@[@"c", @"d"] forKey:kDKEntityTestsPostSharedTo];
   success = [postObject save:&error];
   STAssertTrue(success, nil);
   STAssertNil(error, error.description);

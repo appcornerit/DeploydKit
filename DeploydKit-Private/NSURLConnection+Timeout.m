@@ -82,8 +82,7 @@
   
   // If the request timed out, return an error
   if (error != NULL) {
-    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:NSLocalizedString(@"Request timed out", nil)
-                                                         forKey:NSLocalizedDescriptionKey];
+    NSDictionary *infoDict = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Request timed out", nil)};
     *error = [NSError errorWithDomain:NSCocoaErrorDomain code:0x100 userInfo:infoDict];
   }
   

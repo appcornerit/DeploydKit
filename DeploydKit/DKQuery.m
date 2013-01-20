@@ -62,11 +62,11 @@
 }
 
 - (void)orderAscendingByKey:(NSString *)key {
-  [self.sort setObject:[NSNumber numberWithInteger:1] forKey:key];
+  (self.sort)[key] = @1;
 }
 
 - (void)orderDescendingByKey:(NSString *)key {
-  [self.sort setObject:[NSNumber numberWithInteger:-1] forKey:key];
+  (self.sort)[key] = @-1;
 }
 
 - (void)orderAscendingByCreationDate {
@@ -86,39 +86,39 @@
 }
 
 - (void)whereKey:(NSString *)key equalTo:(id)object {
-  [self.queryMap setObject:object forKey:key];
+  (self.queryMap)[key] = object;
 }
 
 - (void)whereKey:(NSString *)key lessThan:(id)object {
-  [[self queryDictForKey:key] setObject:object forKey:@"$lt"];
+  [self queryDictForKey:key][@"$lt"] = object;
 }
 
 - (void)whereKey:(NSString *)key lessThanOrEqualTo:(id)object {
-  [[self queryDictForKey:key] setObject:object forKey:@"$lte"];
+  [self queryDictForKey:key][@"$lte"] = object;
 }
 
 - (void)whereKey:(NSString *)key greaterThan:(id)object {
-  [[self queryDictForKey:key] setObject:object forKey:@"$gt"];
+  [self queryDictForKey:key][@"$gt"] = object;
 }
 
 - (void)whereKey:(NSString *)key greaterThanOrEqualTo:(id)object {
-  [[self queryDictForKey:key] setObject:object forKey:@"$gte"];
+  [self queryDictForKey:key][@"$gte"] = object;
 }
 
 - (void)whereKey:(NSString *)key notEqualTo:(id)object {
-  [[self queryDictForKey:key] setObject:object forKey:@"$ne"];
+  [self queryDictForKey:key][@"$ne"] = object;
 }
 
 - (void)whereKey:(NSString *)key containedIn:(NSArray *)array {
-  [[self queryDictForKey:key] setObject:array forKey:@"$in"];
+  [self queryDictForKey:key][@"$in"] = array;
 }
 
 - (void)whereKey:(NSString *)key notContainedIn:(NSArray *)array {
-  [[self queryDictForKey:key] setObject:array forKey:@"$nin"];
+  [self queryDictForKey:key][@"$nin"] = array;
 }
 
 - (void)whereKey:(NSString *)key containsAllIn:(NSArray *)array {
-  [[self queryDictForKey:key] setObject:array forKey:@"$all"];
+  [self queryDictForKey:key][@"$all"] = array;
 }
 
 - (void)whereKey:(NSString *)key matchesRegex:(NSString *)regex {
@@ -137,9 +137,9 @@
     [optionString appendString:@"s"];
   }
   NSMutableDictionary *queryDict = [self queryDictForKey:key];
-  [queryDict setObject:regex forKey:@"$regex"];
+  queryDict[@"$regex"] = regex;
   if (optionString.length > 0) {
-    [queryDict setObject:optionString forKey:@"$options"];
+    queryDict[@"$options"] = optionString;
   }
 }
 
@@ -165,11 +165,11 @@
 }
 
 - (void)whereKeyExists:(NSString *)key {
-  [[self queryDictForKey:key] setObject:[NSNumber numberWithBool:YES] forKey:@"$exists"];
+  [self queryDictForKey:key][@"$exists"] = @YES;
 }
 
 - (void)whereKeyDoesNotExist:(NSString *)key {
-  [[self queryDictForKey:key] setObject:[NSNumber numberWithBool:NO] forKey:@"$exists"];
+  [self queryDictForKey:key][@"$exists"] = @NO;
 }
 
 - (void)whereEntityIdMatches:(NSString *)entityId {
@@ -177,22 +177,22 @@
 }
 
 -(void) whereKey:(NSString *)key nearPoint:(NSArray*)point withinDistance:(NSNumber*)distance {
-   [[self queryDictForKey:key] setObject:point forKey:@"$near"];
+   [self queryDictForKey:key][@"$near"] = point;
    //[[self queryDictForKey:key] setObject:@"true" forKey:@"spherical"];
-   [[self queryDictForKey:key] setObject:distance forKey:@"$maxDistance"];
+   [self queryDictForKey:key][@"$maxDistance"] = distance;
 }
 
 - (void)excludeKeys:(NSArray *)keys {
   [self.fieldInclExcl removeAllObjects];
   for (NSString *key in keys) {
-    [self.fieldInclExcl setObject:[NSNumber numberWithInt:0] forKey:key];
+    (self.fieldInclExcl)[key] = @0;
   }
 }
 
 - (void)includeKeys:(NSArray *)keys {
   [self.fieldInclExcl removeAllObjects];
   for (NSString *key in keys) {
-    [self.fieldInclExcl setObject:[NSNumber numberWithInt:1] forKey:key];
+    (self.fieldInclExcl)[key] = @1;
   }
 }
 
@@ -202,30 +202,30 @@
   
   if (self.queryMap.count > 0) {
         for (id key in self.queryMap) {
-             id value = [self.queryMap objectForKey:key];
-             [requestDict setObject:value forKey:key];
+             id value = (self.queryMap)[key];
+             requestDict[key] = value;
         }
   }
   if (self.ors.count > 0) {
-    [requestDict setObject:self.ors forKey:@"$or"];
+    requestDict[@"$or"] = self.ors;
   }
   if (self.ands.count > 0) {
-    [requestDict setObject:self.ands forKey:@"$and"];
+    requestDict[@"$and"] = self.ands;
   }
   if (self.fieldInclExcl.count > 0) {
-    [requestDict setObject:self.fieldInclExcl forKey:@"$fields"];
+    requestDict[@"$fields"] = self.fieldInclExcl;
   }
   if (self.sort.count > 0) {
-    [requestDict setObject:self.sort forKey:@"$sort"];
+    requestDict[@"$sort"] = self.sort;
   }
   if (self.limit > 0) {
-    [requestDict setObject:[NSNumber numberWithUnsignedInteger:self.limit] forKey:@"$limit"];
+    requestDict[@"$limit"] = @(self.limit);
   }
   if (self.limitRecursion > 0) {
-    [requestDict setObject:[NSNumber numberWithUnsignedInteger:self.limitRecursion] forKey:@"$limitRecursion"];
+    requestDict[@"$limitRecursion"] = @(self.limitRecursion);
   }
   if (self.skip > 0) {
-    [requestDict setObject:[NSNumber numberWithUnsignedInteger:self.skip] forKey:@"$skip"];
+    requestDict[@"$skip"] = @(self.skip);
   }
   
   NSMutableString * queryParams = [NSMutableString stringWithString:self.entityName];
@@ -368,10 +368,10 @@
 @implementation DKQuery (Private)
 
 - (NSMutableDictionary*)queryDictForKey:(NSString *)key {
-  NSMutableDictionary *dict = [self.queryMap objectForKey:key];
+  NSMutableDictionary *dict = (self.queryMap)[key];
   if (dict == nil) {
     dict = [NSMutableDictionary new];
-    [self.queryMap setObject:dict forKey:key];
+    (self.queryMap)[key] = dict;
   }
   
   return dict;

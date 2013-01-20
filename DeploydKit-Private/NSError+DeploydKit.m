@@ -19,10 +19,10 @@
   if (error != nil) {
     NSMutableDictionary *userInfo = [NSMutableDictionary new];
     if (desc.length > 0) {
-      [userInfo setObject:desc forKey:NSLocalizedDescriptionKey];
+      userInfo[NSLocalizedDescriptionKey] = desc;
     }
     if (originalError != nil) {
-      [userInfo setObject:originalError forKey:@"DKSourceError"];
+      userInfo[@"DKSourceError"] = originalError;
     }
     *error = [NSError errorWithDomain:kDKErrorDomain code:code userInfo:userInfo];
   }

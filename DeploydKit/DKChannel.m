@@ -39,20 +39,20 @@ static DKChannel* currentChannel = nil;
         [currentChannel setObject:identifier forKey:kDKEntityChannelUDID];
     }    
 
-    NSString * appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString * appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     [currentChannel setObject:appVersion forKey:kDKEntityChannelAppVersion];
     //NSString * appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     NSString * timeZone = [[NSTimeZone systemTimeZone] name]; //[[NSTimeZone defaultTimeZone] name];
     [currentChannel setObject:timeZone forKey:kDKEntityChannelTimeZone];
     NSString * currentLocale = [[NSLocale currentLocale] identifier];
     [currentChannel setObject:currentLocale forKey:kDKEntityChannelLocale];
-    NSString * preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString * preferredLanguage = [NSLocale preferredLanguages][0];
     [currentChannel setObject:preferredLanguage forKey:kDKEntityChannelLanguage];
     NSString * deviceModel = [[UIDevice currentDevice] model];
     [currentChannel setObject:deviceModel forKey:kDKEntityChannelDeviceModel];
     NSString * deviceSystem = [NSString stringWithFormat:@"%@ %@", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
     [currentChannel setObject:deviceSystem forKey:kDKEntityChannelDeviceSystem];
-    NSNumber * badge = [NSNumber numberWithInteger:[UIApplication sharedApplication].applicationIconBadgeNumber];
+    NSNumber * badge = @([UIApplication sharedApplication].applicationIconBadgeNumber);
     [currentChannel setObject:badge forKey:kDKEntityChannelBadge];
     
     #ifdef __CORELOCATION__
@@ -99,7 +99,7 @@ static DKChannel* currentChannel = nil;
 
 - (void)sendPushInBackground:(NSDictionary *)data channel:(NSString *)channel{
     dispatch_async([DKManager queue], ^{
-        [self sendPush:data channels: [NSArray arrayWithObjects:channel,nil]];
+        [self sendPush:data channels: @[channel]];
     });
 }
 
@@ -118,8 +118,8 @@ static DKChannel* currentChannel = nil;
         [chArr removeObjectsInArray:curChannels];
     if([chArr count] == 0) return;
     
-    [requestDict setObject:data forKey:@"data"];
-    [requestDict setObject:chArr forKey:@"channels"];    
+    requestDict[@"data"] = data;
+    requestDict[kDKEntityChannelPrivateChannels] = chArr;    
     
     // Send request synchronously
     DKRequest *request = [DKRequest request];
