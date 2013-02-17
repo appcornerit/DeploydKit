@@ -14,7 +14,7 @@
 /**
  Helper class for displaying the network activity indicator
  */
-@interface DKNetworkActivity
+@interface DKNetworkActivity : NSObject
 
 /**
  Begin a network activity.
