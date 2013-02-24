@@ -193,7 +193,7 @@
 
 + (BOOL)canParseResponse:(NSHTTPURLResponse *)response {
   NSInteger code = response.statusCode;
-  return (code == 200 || code == 400);
+  return (code == 200 || code == 204 || code == 400);
 }
 
 + (id)parseResponse:(NSHTTPURLResponse *)response withData:(NSData *)data error:(NSError **)error isCached:(BOOL)isCached {

@@ -305,7 +305,7 @@
      request.cachePolicy = DKCachePolicyIgnoreCache;
      NSError *requestError = nil;
      id resultMap = [request sendRequestWithObject:requestDict method:@"me" entity:[self.entityName stringByAppendingPathComponent:@"me"] error:&requestError];
-     if (requestError != nil) { //TODO: something problem for not logged: "Unknown response (204)";
+     if (requestError != nil) {
          if (error != nil) {
              *error = requestError;
          }
@@ -459,14 +459,16 @@
                        method:(NSString *) method
                         error:(NSError **)error {
   if (![resultMap isKindOfClass:[NSDictionary class]]) {
+    if([method isEqualToString:@"logout"]){
+        return YES; //logout: 204 No Content
+    }
+    if([method isEqualToString:@"me"]){
+        return NO; //me (logout): 204 No Content
+    }
     [NSError writeToError:error
                      code:DKErrorInvalidParams
               description:NSLocalizedString(@"Cannot commit action because result JSON is malformed (not an object)", nil)
                  original:nil];
-    if([method isEqualToString:@"logout"]){
-        error = nil; //TODO: something problem: "Cannot commit action because result JSON is malformed (not an object)";
-        return YES;
-    }
 #ifdef CONFIGURATION_Debug
     NSLog(@"result => %@: %@", NSStringFromClass([resultMap class]), resultMap);
 #endif
