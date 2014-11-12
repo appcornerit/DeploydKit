@@ -112,6 +112,6 @@ DeploydKit provides disk caching for DKQuery, DKFile (loadData methods only) and
 [DKManager clearAllCachedResults];
 ```
 
-#### Project Status
-Work in progress to switch DeploydKit on AFNetworking with several improvements, stay tuned!
+#### Project Example
+See [AppCorner-Social](https://github.com/appcornerit/AppCorner-Social) for a working example.
 
