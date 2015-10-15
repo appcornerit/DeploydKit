@@ -1,3 +1,5 @@
+#No Longer Maintained.
+
 Do you need a professional backend for your iOS app? Add one with **DeploydKit** for [Deployd](http://www.deployd.com) in minutes!
 
 DeploydKit is a lightweight framework (based on [DataKit project](https://github.com/eaigner/DataKit)) to work with [Deployd API](https://github.com/deployd/deployd) (open source) that has great features to create a solid backend for the production environment. Integrate the SDK into your app, configure Deployd and you are ready to go!
